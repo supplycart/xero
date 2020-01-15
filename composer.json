@@ -1,0 +1,37 @@
+{
+  "name": "supplycart/xero",
+  "description": "Xero integration",
+  "require": {
+    "guzzlehttp/guzzle": "^6.5"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^4.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Supplycart\\Xero\\": "src/"
+    },
+    "classmap": [
+      "database/migrations"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Supplycart\\Xero\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Supplycart\\Xero\\XeroServiceProvider"
+      ]
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Azri Ismail",
+      "email": "mazri.iar@gmail.com"
+    }
+  ]
+}
