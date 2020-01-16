@@ -42,7 +42,7 @@ class Redirect extends Action
 
         XeroAuthenticated::dispatch($storage->getUuid(), $token);
 
-        return redirect()->away(config('xero.authenticated_uri'));
+        return redirect()->away(config('xero.oauth2.authenticated_uri'));
     }
 
     public function failed()
