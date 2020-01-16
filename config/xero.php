@@ -12,7 +12,8 @@ return [
     'oauth2' => [
         'client_id' => env('XERO_CLIENT_ID'),
         'client_secret' => env('XERO_CLIENT_SECRET'),
-        'redirect_path' => env('XERO_REDIRECT_PATH', '/xero/oauth2/redirect'),
+        'redirect_uri' => env('XERO_REDIRECT_URI', '/xero/oauth2/redirect'),
+        'authenticated_uri' => env('XERO_AUTHENTICATED_URI'),
         'scope' => env('XERO_SCOPE',
             'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings'),
         'authorize_url' => 'https://login.xero.com/identity/connect/authorize',

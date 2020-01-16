@@ -40,6 +40,6 @@ class Redirect extends Action
 
         XeroAuthenticated::dispatch(new TokenResponse($data), $storage->getUuid());
 
-        return redirect()->away(config('supplycart.adam_url') . '/company#xero');
+        return redirect()->away(config('xero.authenticated_uri'));
     }
 }

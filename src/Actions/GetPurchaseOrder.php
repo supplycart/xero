@@ -21,6 +21,10 @@ class GetPurchaseOrder extends Action implements ShouldCheckConnection
             ]
         );
 
-        logs()->info('response', json_decode($response->getBody()->getContents()));
+        $data = (array) json_decode($response->getBody()->getContents());
+
+        $this->log($data);
+
+        return $data;
     }
 }

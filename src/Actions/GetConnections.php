@@ -8,7 +8,7 @@ class GetConnections extends Action
 {
     public function handle()
     {
-        logs()->info(__CLASS__ . ': START');
+        $this->log(__CLASS__ . ': START');
 
         try {
             $response = $this->xero->client->get(
@@ -23,14 +23,14 @@ class GetConnections extends Action
                 ]
             );
         } catch (ClientException $e) {
-            logs()->info('ERROR!: ' . $e->getMessage());
+            $this->log('ERROR!: ' . $e->getMessage());
 
             return [];
         }
 
         $connections = json_decode($response->getBody()->getContents());
 
-        logs()->info(__CLASS__ . ': ENDS');
+        $this->log(__CLASS__ . ': ENDS');
 
         return $connections;
     }

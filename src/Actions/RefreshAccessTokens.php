@@ -8,7 +8,7 @@ class RefreshAccessTokens extends Action
 {
     public function handle()
     {
-        logs()->info(__CLASS__ . ': START');
+        $this->log(__CLASS__ . ': START');
 
         /** @var \Supplycart\Xero\Xero $xero */
         $xero = $this->xero->storage->refresh();
@@ -23,23 +23,23 @@ class RefreshAccessTokens extends Action
                     'refresh_token' => $xero->getRefreshToken(),
                 ],
             ]);
+
+            $data = json_decode($response->getBody()->getContents());
+
+            $xero->setAccessToken(data_get($data, 'access_token'));
+            $xero->setRefreshToken(data_get($data, 'refresh_token'));
+            $xero->persist();
         } catch (ClientException $e) {
             $xero->setAccessToken(null);
             $xero->setRefreshToken(null);
             $xero->persist();
 
-            logs()->info('XERO disconnected!');
+            $this->log('XERO disconnected!');
 
             return false;
         }
 
-        $data = json_decode($response->getBody()->getContents());
-
-        $xero->setAccessToken(data_get($data, 'access_token'));
-        $xero->setRefreshToken(data_get($data, 'refresh_token'));
-        $xero->persist();
-
-        logs()->info(__CLASS__ . ': END');
+        $this->log(__CLASS__ . ': END');
 
         return true;
     }

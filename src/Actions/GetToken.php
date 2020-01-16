@@ -16,7 +16,7 @@ class GetToken extends Action
                 'form_params' => [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
-                    'redirect_uri' => url(config('xero.oauth2.redirect_path')),
+                    'redirect_uri' => config('xero.oauth2.redirect_uri'),
                 ],
             ]);
 

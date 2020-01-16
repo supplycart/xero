@@ -7,8 +7,8 @@ use Supplycart\Xero\Data\Contact;
 
 class CreateContact extends Action
 {
-    public function handle()
+    public function handle(Contact $data)
     {
-        return new Contact([]);
+
     }
 }

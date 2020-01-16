@@ -19,12 +19,12 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
     private $data;
 
     /**
-     * @param array $data
-     * @return string|\Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder
+     * @param PurchaseOrder $data
+     * @return array
      */
-    public function handle(array $data)
+    public function handle(PurchaseOrder $data)
     {
-        logs()->info(__CLASS__ . ': START');
+        $this->log(__CLASS__ . ': START');
 
         $response = $this->xero->client->post(
             'https://api.xero.com/api.xro/2.0/PurchaseOrders',
@@ -40,12 +40,12 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
             ]
         );
 
-        $purchaseOrder = json_decode($response->getBody()->getContents());
+        $data = (array) json_decode($response->getBody()->getContents());
 
-        logs()->info('data', (array) $purchaseOrder);
+        $this->log($data);
 
-        logs()->info(__CLASS__ . ': END');
+        $this->log(__CLASS__ . ': END');
 
-        return $purchaseOrder;
+        return $data;
     }
 }
