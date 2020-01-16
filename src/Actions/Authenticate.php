@@ -11,10 +11,10 @@ class Authenticate extends Action
     {
         $query = http_build_query([
             'scope' => config('xero.oauth2.scope'),
-            'state' => request()->get('state'),
+            'state' => request('state'),
             'response_type' => 'code',
             'approval_prompt' => 'auto',
-            'redirect_uri' => url(config('xero.oauth2.redirect_path')),
+            'redirect_uri' => config('xero.oauth2.redirect_uri'),
             'client_id' => config('xero.oauth2.client_id'),
         ]);
 
