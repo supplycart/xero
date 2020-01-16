@@ -26,9 +26,9 @@ class Redirect extends Action
         $storage = $this->xero->storage;
 
         $storage
-            ->setAccessToken($token->access_token)
-            ->setRefreshToken($token->refresh_token)
-            ->setExpiredAt(Carbon::now()->addSeconds($token->expires_in))
+            ->setAccessToken($token->accessToken)
+            ->setRefreshToken($token->refreshToken)
+            ->setExpiredAt(Carbon::now()->addSeconds($token->expiresIn))
             ->persist();
 
         $connections = $this->xero->getConnections();
