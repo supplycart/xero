@@ -1,6 +1,9 @@
 {
   "name": "supplycart/xero",
   "description": "Xero integration",
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
   "require": {
     "php": "^7.3",
     "guzzlehttp/guzzle": "^6.5",
