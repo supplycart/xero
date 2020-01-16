@@ -4,7 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Supplycart\Xero\Data\TokenResponse;
+use Supplycart\Xero\Data\Token;
 use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Events\XeroAuthenticationFailed;
 
@@ -17,20 +17,20 @@ class Redirect extends Action
      */
     public function handle(Request $request)
     {
-        $data = (array) $this->xero->getToken($request->input('code'));
+        $token = $this->xero->getToken($request->input('code'));
 
         $storage = $this->xero->storage;
 
         $storage
-            ->setAccessToken($accessToken = data_get($data, 'access_token'))
-            ->setRefreshToken($refreshToken = data_get($data, 'refresh_token'))
-            ->setExpiredAt(Carbon::now()->addSeconds(data_get($data, 'expires_in')))
+            ->setAccessToken($token->access_token)
+            ->setRefreshToken($token->refresh_token)
+            ->setExpiredAt(Carbon::now()->addSeconds($token->expires_in))
             ->persist();
 
         $connections = $this->xero->getConnections();
 
         if (empty($connections)) {
-            XeroAuthenticationFailed::dispatch();
+            XeroAuthenticationFailed::dispatch($storage->getUuid());
 
             return response()->json(['status' => 'error', 'message' => 'Unable to authenticate with XERO']);
         }
@@ -38,7 +38,7 @@ class Redirect extends Action
         $storage->setTenantID(data_get($connections, '0.tenantId'));
         $storage->persist();
 
-        XeroAuthenticated::dispatch(new TokenResponse($data), $storage->getUuid());
+        XeroAuthenticated::dispatch($storage->getUuid(), $token);
 
         return redirect()->away(config('xero.authenticated_uri'));
     }

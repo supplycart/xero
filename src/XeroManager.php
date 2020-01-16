@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Supplycart\Xero\Actions\Action;
 use Supplycart\Xero\Contracts\Storage;
-use Supplycart\Xero\Data\TokenResponse;
+use Supplycart\Xero\Data\Token;
 use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Exceptions\InvalidActionException;
 use Supplycart\Xero\Exceptions\UnhandledActionException;
@@ -28,6 +28,7 @@ use Supplycart\Xero\Exceptions\UnhandledActionException;
  * @method array getConnections()
  * @method disconnect()
  * @method getTaxRates()
+ * @method Token|null getToken($code)
  */
 class XeroManager
 {

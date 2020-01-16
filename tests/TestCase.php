@@ -1,5 +1,6 @@
 <?php
 
+namespace Supplycart\Xero\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 

@@ -2,7 +2,9 @@
   "name": "supplycart/xero",
   "description": "Xero integration",
   "require": {
-    "guzzlehttp/guzzle": "^6.5"
+    "php": "^7.3",
+    "guzzlehttp/guzzle": "^6.5",
+    "ext-json": "*"
   },
   "require-dev": {
     "orchestra/testbench": "^4.5"

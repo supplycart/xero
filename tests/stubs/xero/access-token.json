@@ -1,0 +1,7 @@
+{
+  "access_token": "thisisastoekn",
+  "id_token": "thisisidtoken",
+  "expires_in": 2000000,
+  "token_type": "Bearer",
+  "refresh_token": "thisisrefreshtoken"
+}

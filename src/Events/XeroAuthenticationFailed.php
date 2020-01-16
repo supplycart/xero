@@ -7,7 +7,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Supplycart\Xero\Data\TokenResponse;
 
 class XeroAuthenticationFailed implements ShouldBroadcast
 {
@@ -16,22 +15,17 @@ class XeroAuthenticationFailed implements ShouldBroadcast
     use SerializesModels;
 
     /**
-     * @var \Supplycart\Xero\Data\TokenResponse
-     */
-    public $response;
-
-    /**
      * @var string
      */
-    public $state;
+    public string $uuid;
 
     /**
      * Create a new event instance.
-     * @param string $state
+     * @param string $uuid
      */
-    public function __construct(string $state)
+    public function __construct(string $uuid)
     {
-        $this->state = $state;
+        $this->uuid = $uuid;
     }
 
     /**
@@ -41,7 +35,7 @@ class XeroAuthenticationFailed implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('xero@' . $this->state);
+        return new PrivateChannel('xero@' . $this->uuid);
     }
 
     /**

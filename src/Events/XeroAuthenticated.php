@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Supplycart\Xero\Data\TokenResponse;
+use Supplycart\Xero\Data\Token;
 
 class XeroAuthenticated implements ShouldBroadcast
 {
@@ -16,21 +16,23 @@ class XeroAuthenticated implements ShouldBroadcast
     use SerializesModels;
 
     /**
-     * @var \Supplycart\Xero\Data\TokenResponse
+     * @var \Supplycart\Xero\Data\Token
      */
-    public $response;
+    public $token;
     /**
      * @var string
      */
-    public $state;
+    public $uuid;
 
     /**
      * Create a new event instance.
+     * @param string $uuid
+     * @param \Supplycart\Xero\Data\Token $token
      */
-    public function __construct(TokenResponse $response, string $state)
+    public function __construct(string $uuid, Token $token)
     {
-        $this->response = $response;
-        $this->state = $state;
+        $this->uuid = $uuid;
+        $this->token = $token;
     }
 
     /**
@@ -40,7 +42,7 @@ class XeroAuthenticated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('xero@' . $this->state);
+        return new PrivateChannel('xero@' . $this->uuid);
     }
 
     /**
@@ -50,6 +52,6 @@ class XeroAuthenticated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return ['response' => $this->response->toArray()];
+        return ['response' => $this->token->toArray()];
     }
 }
