@@ -19,6 +19,10 @@ class Redirect extends Action
     {
         $token = $this->xero->getToken($request->input('code'));
 
+        if (empty($token)) {
+            return $this->failed();
+        }
+
         $storage = $this->xero->storage;
 
         $storage
@@ -30,9 +34,7 @@ class Redirect extends Action
         $connections = $this->xero->getConnections();
 
         if (empty($connections)) {
-            XeroAuthenticationFailed::dispatch($storage->getUuid());
-
-            return response()->json(['status' => 'error', 'message' => 'Unable to authenticate with XERO']);
+            return $this->failed();
         }
 
         $storage->setTenantID(data_get($connections, '0.tenantId'));
@@ -41,5 +43,12 @@ class Redirect extends Action
         XeroAuthenticated::dispatch($storage->getUuid(), $token);
 
         return redirect()->away(config('xero.authenticated_uri'));
+    }
+
+    public function failed()
+    {
+        XeroAuthenticationFailed::dispatch($this->xero->storage->getUuid());
+
+        return response()->json(['status' => 'error', 'message' => 'Unable to authenticate with XERO']);
     }
 }
