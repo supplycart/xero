@@ -2,7 +2,22 @@
 
 namespace Supplycart\Xero\Data;
 
-class Contact extends Data
+use Spatie\DataTransferObject\DataTransferObject;
+
+class Contact extends DataTransferObject
 {
-    protected $contactId;
+    /**
+     * @var string
+     */
+    public $ContactID;
+
+    /**
+     * @var string
+     */
+    public $ContactStatus;
+
+    /**
+     * @var string
+     */
+    public $Name;
 }

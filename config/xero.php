@@ -21,4 +21,5 @@ return [
         'resource_owner_details_url' => 'https://api.xero.com/api.xro/2.0/Organisation',
     ],
     'log_channel' => env('XERO_LOG_CHANNEL', 'xero'),
+    'debug' => env('XERO_DEBUG', false),
 ];

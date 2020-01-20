@@ -49,17 +49,23 @@ abstract class Action
     }
 
     /**
-     * @param null $message
-     * @return \Illuminate\Log\Logger
+     * @param string $message
+     * @param string $type
+     * @return \Illuminate\Log\Logger|void
      */
-    public function log($message = null)
+    public function log(string $message, $type = 'info')
     {
         $channel = config('xero.log_channel');
+        $debugMode = config('xero.debug');
+
+        if (!$debugMode) {
+            return;
+        }
 
         if (!array_key_exists($channel, config('logging.channels'))) {
             $channel = config('logging.default');
         }
 
-        return $message ? logs()->channel($channel)->info($message) : logs()->channel();
+        return logs()->channel($channel)->$type($message);
     }
 }

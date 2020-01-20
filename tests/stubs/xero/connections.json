@@ -1,0 +1,12 @@
+[
+  {
+    "id": "e82447cc-ce78-468f-b2c6-9af74c519ead",
+    "tenantId": "83299b9e-5747-4a14-a18a-a6c94f824eb7",
+    "tenantType": "ORGANISATION"
+  },
+  {
+    "id": "077a50b2-b95c-4a22-8a89-47b0cff2485e",
+    "tenantId": "45e4708e-d852-4111-ab3a-dd8cd03913e1",
+    "tenantType": "ORGANISATION"
+  }
+]

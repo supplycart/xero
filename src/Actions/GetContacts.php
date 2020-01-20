@@ -4,6 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use GuzzleHttp\Exception\ClientException;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Data\Contact\ContactCollection;
 
 class GetContacts extends Action implements ShouldCheckConnection
 {
@@ -20,6 +21,8 @@ class GetContacts extends Action implements ShouldCheckConnection
             ],
         ]);
 
-        return data_get(json_decode($response->getBody()->getContents()), 'Contacts', []);
+        $data = json_decode($response->getBody()->getContents());
+
+        return new ContactCollection(data_get($data, 'Contacts', []));
     }
 }

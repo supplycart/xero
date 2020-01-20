@@ -2,37 +2,88 @@
 
 namespace Supplycart\Xero\Data\PurchaseOrder;
 
+use Spatie\DataTransferObject\DataTransferObject;
 use Supplycart\Xero\Data\Data;
 use Supplycart\Xero\Exceptions\InvalidAttributesException;
 
 /**
  * Class PurchaseOrder
  * @package Supplycart\Xero\Data
- *
- * @property string PurchaseOrderID
- * @property string PurchaseOrderNumber
- * @property string Reference
- * @property string AttentionTo
- * @property string Telephone
- * @property string DeliveryAddress
- * @property string DeliveryDateString
- * @property string DeliveryInstructions
- * @property string DateString
- * @property string Status
- * @property array LineItems
- * @property float SubTotal
- * @property float TotalTax
- * @property float Total
- * @property \Supplycart\Xero\Data\Contact Contact
  */
 class PurchaseOrder extends Data
 {
-    public function rules()
-    {
-        return [
-            'Contact' => ['required'],
-            'LineItems' => ['required'],
-        ];
-    }
+    /**
+     * @var string
+     */
+    public $PurchaseOrderID;
 
+    /**
+     * @var string
+     */
+    public $PurchaseOrderNumber;
+
+    /**
+     * @var string
+     */
+    public $Reference;
+
+    /**
+     * @var string
+     */
+    public $AttentionTo;
+
+    /**
+     * @var string
+     */
+    public $Telephone;
+
+    /**
+     * @var string
+     */
+    public $DeliveryAddress;
+
+    /**
+     * @var string
+     */
+    public $DeliveryDateString;
+
+    /**
+     * @var string
+     */
+    public $DeliveryInstructions;
+
+    /**
+     * @var string
+     */
+    public $DateString;
+
+    /**
+     * @var string
+     */
+    public $Status;
+
+    /**
+     * @var string
+     */
+    public $SubTotal;
+
+    /**
+     * @var string
+     */
+    public $TotalTax;
+
+    /**
+     * @var string
+     */
+    public $Total;
+
+    /**
+     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection
+     */
+    public $LineItems;
+
+    /**
+     * @var \Supplycart\Xero\Data\Contact
+     */
+    public $Contact;
 }

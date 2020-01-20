@@ -2,11 +2,32 @@
 
 namespace Supplycart\Xero\Data;
 
+use Spatie\DataTransferObject\DataTransferObject;
+
 class Token extends Data
 {
-    public $accessToken;
-    public $expiresIn;
-    public $idToken;
-    public $refreshToken;
-    public $tokenType;
+    /**
+     * @var string
+     */
+    public $access_token;
+
+    /**
+     * @var string
+     */
+    public $id_token;
+
+    /**
+     * @var string
+     */
+    public $refresh_token;
+
+    /**
+     * @var string
+     */
+    public $token_type;
+
+    /**
+     * @var int
+     */
+    public $expires_in;
 }

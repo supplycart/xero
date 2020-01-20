@@ -3,9 +3,14 @@
 namespace Supplycart\Xero\Actions;
 
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder;
 
 class GetPurchaseOrder extends Action implements ShouldCheckConnection
 {
+    /**
+     * @param string $poNumber
+     * @return \Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder
+     */
     public function handle(string $poNumber)
     {
         $response = $this->xero->client->get(
@@ -25,6 +30,6 @@ class GetPurchaseOrder extends Action implements ShouldCheckConnection
 
         $this->log($data);
 
-        return $data;
+        return new PurchaseOrder($data);
     }
 }

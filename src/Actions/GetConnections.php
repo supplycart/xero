@@ -3,6 +3,7 @@
 namespace Supplycart\Xero\Actions;
 
 use GuzzleHttp\Exception\ClientException;
+use Supplycart\Xero\Data\Connection\ConnectionCollection;
 
 class GetConnections extends Action
 {
@@ -28,10 +29,10 @@ class GetConnections extends Action
             return [];
         }
 
-        $connections = json_decode($response->getBody()->getContents());
+        $connections = (array) json_decode($response->getBody()->getContents());
 
         $this->log(__CLASS__ . ': ENDS');
 
-        return $connections;
+        return new ConnectionCollection($connections);
     }
 }

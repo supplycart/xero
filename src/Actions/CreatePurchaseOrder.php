@@ -20,7 +20,7 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
 
     /**
      * @param PurchaseOrder $data
-     * @return array
+     * @return \Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder
      */
     public function handle(PurchaseOrder $data)
     {
@@ -32,7 +32,7 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
                 'query' => [
                     'SummarizeErrors' => 'false',
                 ],
-                'json' => $data,
+                'json' => $data->toArray(),
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
                     'xero-tenant-id' => $this->xero->storage->getTenantID(),
@@ -46,6 +46,6 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
 
         $this->log(__CLASS__ . ': END');
 
-        return $data;
+        return new PurchaseOrder($data);
     }
 }
