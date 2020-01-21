@@ -97,9 +97,9 @@ class XeroManager
         } catch (UnhandledActionException $e) {
             throw $e;
         } catch (ClientException $e) {
-            $action->log()->error($e->getResponse()->getBody()->getContents());
+            $action->log($e->getResponse()->getBody()->getContents(), 'error');
         } catch (\Exception $e) {
-            $action->log()->error($e->getMessage());
+            $action->log($e->getMessage(), 'error');
         }
     }
 
