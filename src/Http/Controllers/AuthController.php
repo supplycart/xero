@@ -20,6 +20,6 @@ class AuthController extends Controller
         /** @var Xero $xero */
         $xero = Xero::findByUuid($request->input('state'));
 
-        return $xero->manager()->redirect($request);
+        return $xero->manager()->redirect($request->input('code'));
     }
 }

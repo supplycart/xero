@@ -19,7 +19,7 @@ use Supplycart\Xero\Exceptions\UnhandledActionException;
  * @package Supplycart\Xero
  *
  * @method authenticate(\Illuminate\Http\Request $request)
- * @method redirect(\Illuminate\Http\Request $request)
+ * @method redirect(string $code)
  * @method createPurchaseOrder(array $array)
  * @method refreshAccessTokens()
  * @method \Supplycart\Xero\Data\Contact\ContactCollection getContacts()
