@@ -20,4 +20,8 @@ class Connection extends Data
      * @var string
      */
     public $tenantType;
+
+    public $createdDateUtc;
+
+    public $updatedDateUtc;
 }

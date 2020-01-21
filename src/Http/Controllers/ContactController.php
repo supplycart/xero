@@ -14,6 +14,6 @@ class ContactController extends Controller
 
         $contacts = $xero->manager()->getContacts();
 
-        return response()->json($contacts);
+        return response()->json($contacts->toArray());
     }
 }
