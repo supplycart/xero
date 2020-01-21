@@ -11,13 +11,12 @@ use Supplycart\Xero\Events\XeroAuthenticationFailed;
 class Redirect extends Action
 {
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param string $code
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     * @throws \Throwable
      */
-    public function handle(Request $request)
+    public function handle(string $code)
     {
-        $token = $this->xero->getToken($request->input('code'));
+        $token = $this->xero->getToken($code);
 
         if (empty($token)) {
             return $this->failed();
@@ -26,9 +25,9 @@ class Redirect extends Action
         $storage = $this->xero->storage;
 
         $storage
-            ->setAccessToken($token->accessToken)
-            ->setRefreshToken($token->refreshToken)
-            ->setExpiredAt(Carbon::now()->addSeconds($token->expiresIn))
+            ->setAccessToken($token->access_token)
+            ->setRefreshToken($token->refresh_token)
+            ->setExpiredAt(Carbon::now()->addSeconds($token->expires_in))
             ->persist();
 
         $connections = $this->xero->getConnections();
@@ -37,7 +36,7 @@ class Redirect extends Action
             return $this->failed();
         }
 
-        $storage->setTenantID(data_get($connections, '0.tenantId'));
+        $storage->setTenantID($connections[0]->tenantId);
         $storage->persist();
 
         XeroAuthenticated::dispatch($storage->getUuid(), $token);
