@@ -1,6 +1,8 @@
 <?php
 
-namespace Supplycart\Xero\Data;
+namespace Supplycart\Xero\Data\PurchaseOrder;
+
+use Supplycart\Xero\Data\Data;
 
 class LineItem extends Data
 {

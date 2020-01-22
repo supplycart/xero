@@ -3,7 +3,7 @@
 namespace Supplycart\Xero\Data\PurchaseOrder;
 
 use Supplycart\Xero\Data\DataCollection;
-use Supplycart\Xero\Data\LineItem;
+use Supplycart\Xero\Data\PurchaseOrder\LineItem;
 
 class LineItemCollection extends DataCollection
 {
