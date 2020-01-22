@@ -3,17 +3,16 @@
 namespace Supplycart\Xero\Data\PurchaseOrder;
 
 use Supplycart\Xero\Data\DataCollection;
-use Supplycart\Xero\Data\LineItem;
 
-class LineItemCollection extends DataCollection
+class PurchaseOrderCollection extends DataCollection
 {
-    public function current(): LineItem
+    public function current(): PurchaseOrder
     {
         return parent::current();
     }
 
     public function for()
     {
-        return LineItem::class;
+        return PurchaseOrder::class;
     }
 }
