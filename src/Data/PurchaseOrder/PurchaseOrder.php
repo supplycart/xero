@@ -58,6 +58,9 @@ class PurchaseOrder extends Data
 
     public $UpdatedDateUTC;
 
+    /**
+     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection|array
+     */
     public $LineItems;
 
     public $StatusAttributeString;
@@ -66,5 +69,8 @@ class PurchaseOrder extends Data
 
     public $Attachments;
 
+    /**
+     * @var \Supplycart\Xero\Data\Contact | null
+     */
     public $Contact;
 }
