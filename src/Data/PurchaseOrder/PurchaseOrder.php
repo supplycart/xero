@@ -2,9 +2,7 @@
 
 namespace Supplycart\Xero\Data\PurchaseOrder;
 
-use Spatie\DataTransferObject\DataTransferObject;
 use Supplycart\Xero\Data\Data;
-use Supplycart\Xero\Exceptions\InvalidAttributesException;
 
 /**
  * Class PurchaseOrder
@@ -59,7 +57,7 @@ class PurchaseOrder extends Data
     public $UpdatedDateUTC;
 
     /**
-     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection | array
+     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection|array|object
      */
     public $LineItems;
 
@@ -70,7 +68,7 @@ class PurchaseOrder extends Data
     public $Attachments;
 
     /**
-     * @var \Supplycart\Xero\Data\Contact | array
+     * @var \Supplycart\Xero\Data\Contact|array|object
      */
     public $Contact;
 }
