@@ -33,7 +33,7 @@ use Supplycart\Xero\Exceptions\UnhandledActionException;
  * @method getTaxRates()
  * @method Token|null getToken($code)
  * @method PurchaseOrder getPurchaseOrder(string $string)
- * @method updatePurchaseOrder(PurchaseOrder $purchaseOrder)
+ * @method PurchaseOrder updatePurchaseOrder(PurchaseOrder $purchaseOrder)
  */
 class XeroManager
 {
