@@ -13,6 +13,8 @@ class GetPurchaseOrder extends Action implements ShouldCheckConnection
      */
     public function handle(string $poNumber)
     {
+        $this->log(__CLASS__ . ': START');
+
         $response = $this->xero->client->get(
             "https://api.xero.com/api.xro/2.0/PurchaseOrders/{$poNumber}",
             [
@@ -28,8 +30,8 @@ class GetPurchaseOrder extends Action implements ShouldCheckConnection
 
         $data = (array) json_decode($response->getBody()->getContents());
 
-        $this->log($data);
+        $this->log(__CLASS__ . ': END');
 
-        return new PurchaseOrder($data);
+        return new PurchaseOrder((array) data_get($data, 'PurchaseOrders.0'));
     }
 }

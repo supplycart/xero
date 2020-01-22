@@ -12,78 +12,59 @@ use Supplycart\Xero\Exceptions\InvalidAttributesException;
  */
 class PurchaseOrder extends Data
 {
-    /**
-     * @var string
-     */
     public $PurchaseOrderID;
 
-    /**
-     * @var string
-     */
     public $PurchaseOrderNumber;
 
-    /**
-     * @var string
-     */
     public $Reference;
 
-    /**
-     * @var string
-     */
     public $AttentionTo;
 
-    /**
-     * @var string
-     */
     public $Telephone;
 
-    /**
-     * @var string
-     */
     public $DeliveryAddress;
 
-    /**
-     * @var string
-     */
     public $DeliveryDateString;
 
-    /**
-     * @var string
-     */
     public $DeliveryInstructions;
 
-    /**
-     * @var string
-     */
     public $DateString;
 
-    /**
-     * @var string
-     */
     public $Status;
 
-    /**
-     * @var string
-     */
     public $SubTotal;
 
-    /**
-     * @var string
-     */
     public $TotalTax;
 
-    /**
-     * @var string
-     */
     public $Total;
 
-    /**
-     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection
-     */
+    public $Date;
+
+    public $HasErrors;
+
+    public $IsDiscounted;
+
+    public $TotalDiscount;
+
+    public $SentToContact;
+
+    public $Type;
+
+    public $CurrencyRate;
+
+    public $CurrencyCode;
+
+    public $LineAmountTypes;
+
+    public $UpdatedDateUTC;
+
     public $LineItems;
 
-    /**
-     * @var \Supplycart\Xero\Data\Contact
-     */
+    public $StatusAttributeString;
+
+    public $HasAttachments;
+
+    public $Attachments;
+
     public $Contact;
 }

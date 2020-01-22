@@ -42,10 +42,8 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
 
         $data = (array) json_decode($response->getBody()->getContents());
 
-        $this->log($data);
-
         $this->log(__CLASS__ . ': END');
 
-        return new PurchaseOrder($data);
+        return new PurchaseOrder((array) data_get($data, 'PurchaseOrders.0'));
     }
 }

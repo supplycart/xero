@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Supplycart\Xero\Actions\Action;
 use Supplycart\Xero\Contracts\Storage;
+use Supplycart\Xero\Data\Connection\ConnectionCollection;
+use Supplycart\Xero\Data\Contact\ContactCollection;
+use Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder;
 use Supplycart\Xero\Data\Token;
 use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Exceptions\InvalidActionException;
@@ -18,17 +21,19 @@ use Supplycart\Xero\Exceptions\UnhandledActionException;
  * Class Xero
  * @package Supplycart\Xero
  *
- * @method authenticate(\Illuminate\Http\Request $request)
+ * @method authenticate(Request $request)
  * @method redirect(string $code)
- * @method createPurchaseOrder(array $array)
+ * @method createPurchaseOrder(PurchaseOrder $purchaseOrder)
  * @method refreshAccessTokens()
- * @method \Supplycart\Xero\Data\Contact\ContactCollection getContacts()
+ * @method ContactCollection getContacts()
  * @method array getOrganisation()
  * @method array getAccounts()
- * @method \Supplycart\Xero\Data\Connection\ConnectionCollection getConnections()
+ * @method ConnectionCollection getConnections()
  * @method disconnect()
  * @method getTaxRates()
  * @method Token|null getToken($code)
+ * @method PurchaseOrder getPurchaseOrder(string $string)
+ * @method updatePurchaseOrder(PurchaseOrder $purchaseOrder)
  */
 class XeroManager
 {
