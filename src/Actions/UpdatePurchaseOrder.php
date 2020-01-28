@@ -21,7 +21,7 @@ class UpdatePurchaseOrder extends Action implements ShouldCheckConnection
                 'query' => [
                     'SummarizeErrors' => 'false',
                 ],
-                'json' => $data,
+                'json' => $purchaseOrder->toArray(),
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
                     'xero-tenant-id' => $this->xero->storage->getTenantID(),
