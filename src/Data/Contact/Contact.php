@@ -8,6 +8,10 @@ class Contact extends DataTransferObject
 {
     public $ContactID;
 
+    public $ContactNumber;
+
+    public $AccountNumber;
+
     public $ContactStatus;
 
     public $Name;
@@ -20,10 +24,6 @@ class Contact extends DataTransferObject
 
     public $SkypeUserName;
 
-    public $Addresses;
-
-    public $Phones;
-
     public $BankAccountDetails;
 
     public $TaxNumber;
@@ -32,19 +32,47 @@ class Contact extends DataTransferObject
 
     public $AccountsPayableTaxType;
 
-    public $DefaultCurrency;
+    public $Addresses;
 
-    public $UpdatedDateUTC;
-
-    public $ContactGroups;
+    public $Phones;
 
     public $IsSupplier;
 
     public $IsCustomer;
 
-    public $Balances;
+    public $DefaultCurrency;
+
+    public $UpdatedDateUTC;
 
     public $ContactPersons;
+
+    public $XeroNetworkKey;
+
+    public $SalesDefaultAccountCode;
+
+    public $PurchasesDefaultAccountCode;
+
+    public $SalesTrackingCategories;
+
+    public $PurchasesTrackingCategories;
+
+    public $TrackingCategoryName;
+
+    public $TrackingOptionName;
+
+    public $PaymentTerms;
+
+    public $ContactGroups;
+
+    public $Website;
+
+    public $BrandingTheme;
+
+    public $BatchPayments;
+
+    public $Discount;
+
+    public $Balances;
 
     public $HasAttachments;
 
