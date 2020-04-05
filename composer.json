@@ -5,13 +5,13 @@
     "test": "vendor/bin/phpunit"
   },
   "require": {
-    "php": "^7.3",
+    "php": ">=7.4",
     "guzzlehttp/guzzle": "^6.5",
     "ext-json": "*",
     "spatie/data-transfer-object": "^1.13"
   },
   "require-dev": {
-    "orchestra/testbench": "^4.5"
+    "orchestra/testbench": "^5.0"
   },
   "autoload": {
     "psr-4": {
