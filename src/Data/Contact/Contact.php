@@ -1,6 +1,6 @@
 <?php
 
-namespace Supplycart\Xero\Data;
+namespace Supplycart\Xero\Data\Contact;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

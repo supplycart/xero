@@ -1,9 +1,9 @@
 <?php
 
-namespace Supplycart\Xero\Actions\Contact;
+namespace Supplycart\Xero\Actions;
 
-use Supplycart\Xero\Actions\Action;
-use Supplycart\Xero\Data\Contact;
+
+use Supplycart\Xero\Data\Contact\Contact;
 
 class CreateContact extends Action
 {
