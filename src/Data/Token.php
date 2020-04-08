@@ -2,8 +2,6 @@
 
 namespace Supplycart\Xero\Data;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
 class Token extends Data
 {
     /**
@@ -30,4 +28,9 @@ class Token extends Data
      * @var int
      */
     public $expires_in;
+
+    /**
+     * @var string
+     */
+    public $scope;
 }
