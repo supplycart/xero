@@ -2,7 +2,6 @@
 
 namespace Supplycart\Xero\Data\Contact;
 
-use Supplycart\Xero\Data\Contact;
 use Supplycart\Xero\Data\DataCollection;
 
 class ContactCollection extends DataCollection

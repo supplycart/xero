@@ -2,13 +2,13 @@
 
 namespace Supplycart\Xero\Actions;
 
-use Supplycart\Xero\Data\Contact;
+use Supplycart\Xero\Data\Contact\Contact;
 
 class GetContact extends Action
 {
     /**
      * @param array $data
-     * @return bool|\Supplycart\Xero\Data\Contact
+     * @return bool|\Supplycart\Xero\Data\Contact\Contact
      */
     public function handle(array $data)
     {
