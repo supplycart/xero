@@ -65,7 +65,7 @@ class XeroManager
 
     public static function routes()
     {
-        Route::prefix('xero')->middleware('cors')->group(__DIR__ . '/../routes/xero.php');
+        Route::prefix('xero')->group(__DIR__ . '/../routes/xero.php');
     }
 
     /**
