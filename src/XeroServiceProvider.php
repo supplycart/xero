@@ -2,14 +2,13 @@
 
 namespace Supplycart\Xero;
 
-use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
 class XeroServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        XeroManager::routes();
+
     }
 
     public function register()

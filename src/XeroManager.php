@@ -16,6 +16,12 @@ use Supplycart\Xero\Data\Token;
 use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Exceptions\InvalidActionException;
 use Supplycart\Xero\Exceptions\UnhandledActionException;
+use Supplycart\Xero\Http\Controllers\AccountController;
+use Supplycart\Xero\Http\Controllers\AuthController;
+use Supplycart\Xero\Http\Controllers\ContactController;
+use Supplycart\Xero\Http\Controllers\OrganisationController;
+use Supplycart\Xero\Http\Controllers\StatusController;
+use Supplycart\Xero\Http\Controllers\TaxRateController;
 
 /**
  * Class Xero
@@ -61,11 +67,6 @@ class XeroManager
     public static function init(Storage $storage)
     {
         return new static(new Client(), $storage);
-    }
-
-    public static function routes()
-    {
-        Route::prefix('xero')->group(__DIR__ . '/../routes/xero.php');
     }
 
     /**
@@ -122,5 +123,32 @@ class XeroManager
         $connections = $this->getConnections();
 
         return !empty($connections);
+    }
+
+    /**
+     * Register routes
+     */
+    public static function routes()
+    {
+        Route::prefix('xero')->group(function () {
+            Route::prefix('oauth2')->group(function () {
+                Route::get('/', [AuthController::class, 'authenticate']);
+
+                Route::get('/redirect', [AuthController::class, 'redirect']);
+            });
+
+            Route::prefix('{uuid}')->group(function () {
+                Route::get('/contacts', [ContactController::class, 'index']);
+
+                Route::get('/status', [StatusController::class, 'show']);
+                Route::put('/status', [StatusController::class, 'update']);
+
+                Route::get('/organisations', [OrganisationController::class, 'index']);
+
+                Route::get('/accounts', [AccountController::class, 'index']);
+
+                Route::get('/tax-rates', [TaxRateController::class, 'index']);
+            });
+        });
     }
 }
