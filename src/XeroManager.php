@@ -3,7 +3,6 @@
 namespace Supplycart\Xero;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -43,15 +42,9 @@ use Supplycart\Xero\Http\Controllers\TaxRateController;
  */
 class XeroManager
 {
-    /**
-     * @var \Supplycart\Xero\Contracts\Storage
-     */
-    public $storage;
+    public Storage $storage;
 
-    /**
-     * @var \GuzzleHttp\Client
-     */
-    public $client;
+    public Client $client;
 
     /**
      * Xero constructor.
@@ -66,7 +59,7 @@ class XeroManager
 
     public static function init(Storage $storage)
     {
-        return new static(new Client(), $storage);
+        return new static(new Client, $storage);
     }
 
     /**
