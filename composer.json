@@ -8,7 +8,7 @@
     "php": ">=7.4",
     "guzzlehttp/guzzle": "^7.0.1",
     "ext-json": "*",
-    "spatie/data-transfer-object": "^1.13"
+    "spatie/data-transfer-object": "^2.5"
   },
   "require-dev": {
     "orchestra/testbench": "^5.0"
