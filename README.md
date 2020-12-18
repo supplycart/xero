@@ -2,12 +2,12 @@
 
 A simple Laravel package to work with XERO API. Using latest OAuth 2.0.
 
-## Getting Started
+### Getting Started
 1. Register and create new application in XERO, https://developer.xero.com.
 2. Get Client ID and Client Secret key and key in the redirect URI.
 
 
-## Installation
+### Installation
 
 Install the package using composer:
 
