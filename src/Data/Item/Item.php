@@ -6,7 +6,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class Item extends DataTransferObject
 {
-    public $ItemId;
+    public $ItemID;
 
     public $Code;
 
@@ -34,5 +34,8 @@ class Item extends DataTransferObject
 
     public $UpdatedDateUTC;
 
-    public $HasValidationErrors;
+    public $ValidationErrors;
+
+    public $StatusAttributeString;
+
 }

@@ -9,9 +9,9 @@ class DeleteItem extends Action implements ShouldCheckConnection
 {
     use Dispatchable;
 
-    public function handle(string $sku)
+    public function handle(string $itemId)
     {
-        $response = $this->xero->client->delete("https://api.xero.com/api.xro/2.0/Items/{$sku}", [
+        $response = $this->xero->client->delete("https://api.xero.com/api.xro/2.0/Items/{$itemId}", [
             'query' => [
                 'SummarizeErrors' => 'false',
             ],

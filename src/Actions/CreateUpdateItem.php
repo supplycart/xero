@@ -2,6 +2,7 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Supplycart\Xero\Data\Item\Item;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 
