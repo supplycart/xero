@@ -1,18 +1,25 @@
-# Xero
+## Laravel Xero
 
-## Setup
-1. Register account at and create new app, https://developer.xero.com
+A simple Laravel package to work with XERO API. Using latest OAuth 2.0.
+
+## Getting Started
+1. Register and create new application in XERO, https://developer.xero.com.
 2. Get Client ID and Client Secret key and key in the redirect URI.
-3. Setup a trial company here as well, https://go.xero.com/
-4. Connect to xero feature on adam.
 
 
-## Env Variables
-`
-XERO_CLIENT_ID={get from developer.xero.com}
-XERO_CLIENT_SECRET={get from developer.xero.com}
-XERO_REDIRECT_URI={get from developer.xero.com}
-XERO_AUTHENTICATED_URI={link to where redirect after authenticate}
-`
+## Installation
 
+Install the package using composer:
 
+```bash
+composer require supplycart/xero
+```
+
+Add this to your `.env` file:
+
+```env
+XERO_CLIENT_ID={your client id}
+XERO_CLIENT_SECRET={your client secret}
+XERO_REDIRECT_URI={your oauth redirect uri}
+XERO_AUTHENTICATED_URI={your redirected url after oauth}
+```
