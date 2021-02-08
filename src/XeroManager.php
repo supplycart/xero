@@ -126,8 +126,10 @@ class XeroManager
         Route::prefix('xero')->group(function () {
             Route::prefix('oauth2')->group(function () {
                 Route::get('/', [AuthController::class, 'authenticate']);
+                Route::get('/internal', [AuthController::class, 'authenticateInternal']);
 
                 Route::get('/redirect', [AuthController::class, 'redirect']);
+                Route::get('/redirect/internal', [AuthController::class, 'redirectInternal']);
             });
 
             Route::prefix('{uuid}')->group(function () {

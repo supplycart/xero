@@ -25,6 +25,7 @@ class Xero extends Model implements Storage
     protected $casts = [
         'is_enabled' => 'boolean',
         'expired_at' => 'datetime',
+        'is_internal' => 'boolean'
     ];
 
     /**
@@ -91,6 +92,16 @@ class Xero extends Model implements Storage
         $this->expired_at = $expiredAt;
 
         return $this;
+    }
+
+    public function getTenantName(): string
+    {
+        return (string) $this->tenant_name;
+    }
+
+    public function setTenantName($tenantName): Storage
+    {
+        return $this->fill(['tenant_name' => $tenantName]);
     }
 
     /**

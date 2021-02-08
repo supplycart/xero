@@ -22,4 +22,20 @@ class AuthController extends Controller
 
         return $xero->manager()->redirect($request->input('code'));
     }
+
+    public function authenticateInternal(Request $request) 
+    {
+        /** @var Xero $xero */
+        $xero = Xero::findByUuid($request->input('state'));
+
+        return $xero->manager()->authenticateInternal($request);
+    }
+
+    public function redirectInternal(Request $request)
+    {
+        /** @var Xero $xero */
+        $xero = Xero::findByUuid($request->input('state'));
+
+        return $xero->manager()->redirectInternal($request->input('code'));
+    }
 }

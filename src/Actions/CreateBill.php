@@ -2,17 +2,31 @@
 
 namespace Supplycart\Xero\Actions;
 
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Arr;
+use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Exceptions\NoActiveConnectionException;
 
-use Supplycart\Xero\Data\Contact\Contact;
-
-class CreateContact extends Action
+class CreateBill extends Action implements ShouldCheckConnection
 {
-    public function handle(array $data)
+    use Dispatchable;
+
+    /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * @param PurchaseOrder $data
+     * @return \Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder
+     */
+    public function handle($data)
     {
         $this->log(__CLASS__ . ': START');
 
         $response = $this->xero->client->post(
-            'https://api.xero.com/api.xro/2.0/Contacts',
+            'https://api.xero.com/api.xro/2.0/Invoices',
             [
                 'query' => [
                     'SummarizeErrors' => 'false',
@@ -29,6 +43,6 @@ class CreateContact extends Action
 
         $this->log(__CLASS__ . ': END');
 
-        return (array) data_get($data, 'Contacts.0');
+        return $data;
     }
 }
