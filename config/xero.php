@@ -20,6 +20,12 @@ return [
         'access_token_url' => 'https://identity.xero.com/connect/token',
         'resource_owner_details_url' => 'https://api.xero.com/api.xro/2.0/Organisation',
     ],
+    'oauth2_internal' => [
+        'client_id' => env('XERO_INTERNAL_CLIENT_ID'),
+        'client_secret' => env('XERO_INTERNAL_SECRET'),
+        'redirect_uri' => env('XERO_INTERNAL_REDIRECT_URI', '/xero/oauth2/redirect/internal'),
+        'authenticated_uri' => env('XERO_INTERNAL_AUTHENTICATED_URI'),
+    ],
     'log_channel' => env('XERO_LOG_CHANNEL', 'xero'),
     'debug' => env('XERO_DEBUG', false),
 ];

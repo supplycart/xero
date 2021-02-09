@@ -40,7 +40,12 @@ abstract class Action
     public function checkConnection()
     {
         if (!$this->xero->isConnected()) {
-            $connected = $this->xero->refreshAccessTokens();
+            if($this->xero->storage->is_internal) {
+                $connected = $this->xero->refreshAccessTokensInternal();
+            } else {
+                $connected = $this->xero->refreshAccessTokens();
+            }
+            
 
             if (!$connected) {
                 throw new NoActiveConnectionException;
