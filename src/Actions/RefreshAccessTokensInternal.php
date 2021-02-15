@@ -28,14 +28,17 @@ class RefreshAccessTokensInternal extends Action
 
             $xero->setAccessToken(data_get($data, 'access_token'));
             $xero->setRefreshToken(data_get($data, 'refresh_token'));
+            $xero->setExpiredAt(now()->addSeconds(data_get($data, 'expires_in')));
             $xero->persist();
         } catch (ClientException $e) {
-            $xero->setAccessToken(null);
-            $xero->setRefreshToken(null);
-            $xero->persist();
+            if($xero->getExpiredAt()->diffInDays(now()) >= 60) {
+                $xero->setAccessToken(null);
+                $xero->setRefreshToken(null);
+                $xero->persist();
 
-            $this->log('XERO disconnected!');
-
+                $this->log('XERO disconnected!');
+            }
+            
             return false;
         }
 
