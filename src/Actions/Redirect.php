@@ -37,6 +37,7 @@ class Redirect extends Action
         }
 
         $storage->setTenantID($connections[0]->tenantId);
+        $storage->setTenantName($connections[0]->tenantName);
         $storage->persist();
 
         XeroAuthenticated::dispatch($storage->getUuid(), $token);

@@ -14,6 +14,8 @@ abstract class DataCollection extends DataTransferObjectCollection
     {
         $singular = $this->for();
 
+        $this->collection = [];
+        
         foreach ($collection as $item) {
             $this->collection[] = new $singular((array) $item);
         }
