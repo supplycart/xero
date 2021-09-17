@@ -18,6 +18,10 @@ interface Storage
 
     public function getTenantID(): string;
 
+    public function setTenantName($tenantID): Storage;
+
+    public function getTenantName(): string;
+
     public function setRefreshToken($refreshToken): Storage;
 
     public function getRefreshToken(): string;

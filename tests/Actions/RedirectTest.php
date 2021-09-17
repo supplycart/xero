@@ -58,6 +58,10 @@ class RedirectTest extends TestCase
             ->shouldReceive('setTenantId')
             ->andReturnSelf();
 
+        $storage
+            ->shouldReceive('setTenantName')
+            ->andReturnSelf();
+
         $redirect = $this->mock(Redirector::class);
 
         $redirect

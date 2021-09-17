@@ -10,6 +10,8 @@ class Connection extends Data
 
     public $tenantId;
 
+    public $tenantName;
+
     public $tenantType;
 
     public $createdDateUtc;
