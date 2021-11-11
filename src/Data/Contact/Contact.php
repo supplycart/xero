@@ -6,6 +6,9 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class Contact extends DataTransferObject
 {
+    // Ignore missing properties that are not in use
+    public bool $ignoreMissing = true;
+
     public $ContactID;
 
     public $ContactNumber;
