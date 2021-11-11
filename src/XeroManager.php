@@ -3,6 +3,7 @@
 namespace Supplycart\Xero;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -12,7 +13,6 @@ use Supplycart\Xero\Data\Connection\ConnectionCollection;
 use Supplycart\Xero\Data\Contact\ContactCollection;
 use Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder;
 use Supplycart\Xero\Data\Token;
-use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Exceptions\InvalidActionException;
 use Supplycart\Xero\Exceptions\UnhandledActionException;
 use Supplycart\Xero\Http\Controllers\AccountController;
@@ -97,8 +97,10 @@ class XeroManager
             throw $e;
         } catch (ClientException $e) {
             $action->log($e->getResponse()->getBody()->getContents(), 'error');
+            throw $e;
         } catch (\Exception $e) {
             $action->log($e->getMessage(), 'error');
+            throw $e;
         }
     }
 
