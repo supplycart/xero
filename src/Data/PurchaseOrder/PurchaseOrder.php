@@ -71,4 +71,6 @@ class PurchaseOrder extends Data
      * @var \Supplycart\Xero\Data\Contact|array|object
      */
     public $Contact;
+
+    public $ValidationErrors;
 }
