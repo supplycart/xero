@@ -14,13 +14,15 @@ class LineItem extends Data
 
     public $UnitAmount;
 
-    public $TaxAmount;
-
-    public $LineAmount;
-
     public $ItemCode;
 
     public $AccountCode;
 
     public $TaxType;
+
+    public $TaxAmount;
+
+    public $LineAmount;
+
+    public $DiscountRate;
 }
