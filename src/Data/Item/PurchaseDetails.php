@@ -11,5 +11,4 @@ class PurchaseDetails extends Data
     public $AccountCode;
 
     public $TaxType;
-
 }

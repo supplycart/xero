@@ -6,5 +6,4 @@ use Spatie\DataTransferObject\FlexibleDataTransferObject;
 
 abstract class Data extends FlexibleDataTransferObject
 {
-
 }

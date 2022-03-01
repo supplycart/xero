@@ -12,5 +12,4 @@ class TestCase extends BaseTestCase
             \Supplycart\Xero\XeroServiceProvider::class,
         ];
     }
-
 }

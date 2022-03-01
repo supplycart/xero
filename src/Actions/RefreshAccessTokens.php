@@ -31,7 +31,7 @@ class RefreshAccessTokens extends Action
             $xero->setExpiredAt(now()->addSeconds(data_get($data, 'expires_in')));
             $xero->persist();
         } catch (ClientException $e) {
-            if($xero->getExpiredAt()->diffInDays(now()) >= 60) {
+            if ($xero->getExpiredAt()->diffInDays(now()) >= 60) {
                 $xero->setAccessToken(null);
                 $xero->setRefreshToken(null);
                 $xero->persist();

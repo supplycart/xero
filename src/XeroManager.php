@@ -59,7 +59,7 @@ class XeroManager
 
     public static function init(Storage $storage)
     {
-        return new static(new Client, $storage);
+        return new static(new Client(), $storage);
     }
 
     /**

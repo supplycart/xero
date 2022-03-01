@@ -39,12 +39,12 @@ class RedirectInternal extends Action
         if (empty($connections)) {
             return $this->failed();
         }
-        
+
         $connectionsArray = $connections->toArray();
 
-        foreach($connectionsArray as $connection){
+        foreach ($connectionsArray as $connection) {
             $this->log($connection['tenantId']);
-            $xero = Xero::where('tenant_id', $connection['tenantId'])->where('is_internal',true)->first();
+            $xero = Xero::where('tenant_id', $connection['tenantId'])->where('is_internal', true)->first();
             if (!$xero) {
                 $xero = Xero::create([
                     'uuid' => Str::uuid(),
@@ -72,7 +72,7 @@ class RedirectInternal extends Action
 
         //Delete the temp xero
         $xeroTemp->delete();
-        
+
         return redirect()->away(config('xero.oauth2_internal.authenticated_uri'));
     }
 
