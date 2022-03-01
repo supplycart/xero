@@ -7,7 +7,7 @@ use Supplycart\Xero\Contracts\ShouldCheckConnection;
 class CreateInvoice extends Action implements ShouldCheckConnection
 {
     public function handle(array $data)
-    {   
+    {
         $this->log(__CLASS__ . ': START');
 
         $response = $this->xero->client->post('https://api.xero.com/api.xro/2.0/Invoices', [

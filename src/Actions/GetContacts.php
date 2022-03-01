@@ -2,7 +2,7 @@
 
 namespace Supplycart\Xero\Actions;
 
-use \Exception as Exception;
+use Exception as Exception;
 use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Contact\ContactCollection;

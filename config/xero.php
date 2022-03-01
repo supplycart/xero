@@ -14,8 +14,10 @@ return [
         'client_secret' => env('XERO_CLIENT_SECRET'),
         'redirect_uri' => env('XERO_REDIRECT_URI', '/xero/oauth2/redirect'),
         'authenticated_uri' => env('XERO_AUTHENTICATED_URI'),
-        'scope' => env('XERO_SCOPE',
-            'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings'),
+        'scope' => env(
+            'XERO_SCOPE',
+            'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings'
+        ),
         'authorize_url' => 'https://login.xero.com/identity/connect/authorize',
         'access_token_url' => 'https://identity.xero.com/connect/token',
         'resource_owner_details_url' => 'https://api.xero.com/api.xro/2.0/Organisation',

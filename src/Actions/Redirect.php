@@ -19,7 +19,7 @@ class Redirect extends Action
         if (is_null($code)) {
             return redirect()->away(config('xero.oauth2.authenticated_uri'));
         }
-        
+
         $token = $this->xero->getToken($code);
 
         if (empty($token)) {

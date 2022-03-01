@@ -37,5 +37,4 @@ class Item extends DataTransferObject
     public $ValidationErrors;
 
     public $StatusAttributeString;
-
 }

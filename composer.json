@@ -2,7 +2,8 @@
   "name": "supplycart/xero",
   "description": "Xero integration",
   "scripts": {
-    "test": "vendor/bin/phpunit"
+    "test": "vendor/bin/phpunit",
+    "fix": "friendsofphp/php-cs-fixer"
   },
   "require": {
     "php": ">=7.4",
@@ -11,7 +12,8 @@
     "spatie/data-transfer-object": "2.8.1"
   },
   "require-dev": {
-    "orchestra/testbench": "^5.0"
+    "orchestra/testbench": "^5.0",
+    "friendsofphp/php-cs-fixer": "^3.6"
   },
   "autoload": {
     "psr-4": {

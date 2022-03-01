@@ -17,7 +17,7 @@ class AuthenticateInternal extends Action
             'redirect_uri' => config('xero.oauth2_internal.redirect_uri'),
             'client_id' => config('xero.oauth2_internal.client_id'),
         ]);
-        
+
         return redirect()->away(config('xero.oauth2.authorize_url') . '?' . $query);
     }
 }
