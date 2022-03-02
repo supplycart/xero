@@ -21,6 +21,7 @@ class CreateBill extends Action implements ShouldCheckConnection
             [
                 'query' => [
                     'SummarizeErrors' => 'false',
+                    'unitdp' => 4,
                 ],
                 'json' => $data,
                 'headers' => [
