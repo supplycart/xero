@@ -9,13 +9,24 @@ use Supplycart\Xero\Data\Contact\ContactCollection;
 
 class GetContacts extends Action implements ShouldCheckConnection
 {
-    public function handle()
+    /**
+     * @param array $params
+     *
+     * @return \Supplycart\Xero\Data\Contact\ContactCollection
+     */
+    public function handle(array $params = [])
     {
         try {
+            $defaultParams = [
+                'IsSupplier' => 'true',
+            ];
+
+            $whereParam = urldecode(http_build_query(array_merge($defaultParams, $params), '=', ' AND '));
+
             $response = $this->xero->client->get('https://api.xero.com/api.xro/2.0/Contacts', [
                 'query' => [
                     'SummarizeErrors' => 'false',
-                    'Where' => 'IsSupplier==true',
+                    'Where' => $whereParam,
                 ],
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),

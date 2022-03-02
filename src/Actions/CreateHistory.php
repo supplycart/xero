@@ -3,21 +3,33 @@
 namespace Supplycart\Xero\Actions;
 
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
-use Supplycart\Xero\Data\Invoice\Bill;
+use Supplycart\Xero\Data\History\History;
 
-class CreateBill extends Action implements ShouldCheckConnection
+class CreateHistory extends Action implements ShouldCheckConnection
 {
     /**
-     * @param Bill $data
+     * @param string $endpoint
+     * @param string $guid
+     * @param array $notes
      *
-     * @return \Supplycart\Xero\Data\Invoice\Bill
+     * @return \Supplycart\Xero\Data\History\History
      */
-    public function handle($data)
+    public function handle(string $endpoint, string $guid, array $notes = [])
     {
         $this->log(__CLASS__ . ': START');
 
+        $url = sprintf('https://api.xero.com/api.xro/2.0/%s/%s/History', $endpoint, $guid);
+
+        $data = [
+            'HistoryRecords' => array_map(function ($note) {
+                return [
+                    'Details' => $note,
+                ];
+            }, $notes),
+        ];
+
         $response = $this->xero->client->put(
-            'https://api.xero.com/api.xro/2.0/Invoices',
+            $url,
             [
                 'query' => [
                     'SummarizeErrors' => 'false',
@@ -34,6 +46,6 @@ class CreateBill extends Action implements ShouldCheckConnection
 
         $this->log(__CLASS__ . ': END');
 
-        return new Bill((array) data_get($data, 'Invoices.0'));
+        return new History((array) data_get($data, 'HistoryRecords.0'));
     }
 }
