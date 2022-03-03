@@ -11,12 +11,12 @@ class UpdatePurchaseOrder extends Action implements ShouldCheckConnection
     {
         $this->log(__CLASS__ . ': START');
 
-        if (empty($purchaseOrder->PurchaseOrderNumber)) {
+        if (empty($purchaseOrder->PurchaseOrderID)) {
             return false;
         }
 
         $response = $this->xero->client->post(
-            "https://api.xero.com/api.xro/2.0/PurchaseOrders/{$purchaseOrder->PurchaseOrderNumber}",
+            "https://api.xero.com/api.xro/2.0/PurchaseOrders/{$purchaseOrder->PurchaseOrderID}",
             [
                 'query' => [
                     'SummarizeErrors' => 'false',
