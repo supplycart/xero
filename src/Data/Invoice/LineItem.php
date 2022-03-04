@@ -6,6 +6,8 @@ use Supplycart\Xero\Data\Data;
 
 class LineItem extends Data
 {
+    public bool $ignoreMissing = true;
+
     public $LineItemID;
 
     public $Description;
@@ -18,6 +20,8 @@ class LineItem extends Data
 
     public $AccountCode;
 
+    public $Item;
+
     public $TaxType;
 
     public $TaxAmount;
@@ -25,4 +29,8 @@ class LineItem extends Data
     public $LineAmount;
 
     public $DiscountRate;
+
+    public $DiscountAmount;
+
+    public $Tracking;
 }

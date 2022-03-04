@@ -10,6 +10,8 @@ use Supplycart\Xero\Data\Data;
  */
 class History extends Data
 {
+    public bool $ignoreMissing = true;
+
     public $Changes;
 
     public $DateUTC;

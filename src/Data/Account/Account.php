@@ -6,29 +6,35 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class Account extends DataTransferObject
 {
+    public bool $ignoreMissing = true;
+
     public $AccountID;
 
     public $Code;
 
     public $Name;
 
-    public $Status;
-
     public $Type;
 
-    public $TaxType;
+    public $BankAccountNumber;
+
+    public $Status;
 
     public $Description;
 
-    public $Class;
+    public $BankAccountType;
 
-    public $SystemAccount;
+    public $CurrencyCode;
+
+    public $TaxType;
 
     public $EnablePaymentsToAccount;
 
     public $ShowInExpenseClaims;
 
-    public $BankAccountType;
+    public $Class;
+
+    public $SystemAccount;
 
     public $ReportingCode;
 
@@ -39,4 +45,8 @@ class Account extends DataTransferObject
     public $UpdatedDateUTC;
 
     public $AddToWatchlist;
+
+    public $HasErrors;
+
+    public $ValidationErrors;
 }

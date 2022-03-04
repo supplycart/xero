@@ -10,17 +10,29 @@ use Supplycart\Xero\Data\Data;
  */
 class Bill extends Data
 {
+    public bool $ignoreMissing = true;
+
     public $Type = 'ACCPAY';
 
     public $InvoiceID;
 
-    public $InvoiceNumber;
+    /**
+     * @var \Supplycart\Xero\Data\Contact|array|object
+     */
+    public $Contact;
 
     public $Date;
 
     public $DueDate;
 
     public $Status;
+
+    public $LineAmountTypes;
+
+    /**
+     * @var \Supplycart\Xero\Data\Invoice\LineItemCollection|array
+     */
+    public $LineItems;
 
     public $SubTotal;
 
@@ -30,11 +42,19 @@ class Bill extends Data
 
     public $TotalDiscount;
 
+    public $UpdatedDateUTC;
+
     public $CurrencyCode;
 
     public $CurrencyRate;
 
+    public $InvoiceNumber;
+
     public $Reference;
+
+    public $BrandingThemeID;
+
+    public $Url;
 
     public $SentToContact;
 
@@ -64,19 +84,7 @@ class Bill extends Data
 
     public $AmountCredited;
 
-    public $LineAmountTypes;
-
     public $HasErrors;
 
     public $ValidationErrors;
-
-    /**
-     * @var \Supplycart\Xero\Data\Contact|array|object
-     */
-    public $Contact;
-
-    /**
-     * @var \Supplycart\Xero\Data\Invoice\LineItemCollection|array
-     */
-    public $LineItems;
 }

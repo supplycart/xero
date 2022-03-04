@@ -29,6 +29,8 @@ class Contact extends DataTransferObject
 
     public $BankAccountDetails;
 
+    public $CompanyNumber;
+
     public $TaxNumber;
 
     public $AccountsReceivableTaxType;
@@ -51,6 +53,8 @@ class Contact extends DataTransferObject
 
     public $XeroNetworkKey;
 
+    public $MergedToContactID;
+
     public $SalesDefaultAccountCode;
 
     public $PurchasesDefaultAccountCode;
@@ -58,6 +62,10 @@ class Contact extends DataTransferObject
     public $SalesTrackingCategories;
 
     public $PurchasesTrackingCategories;
+
+    public $SalesDefaultLineAmountType;
+
+    public $PurchasesDefaultLineAmountType;
 
     public $TrackingCategoryName;
 
@@ -79,5 +87,7 @@ class Contact extends DataTransferObject
 
     public $HasAttachments;
 
-    public $HasValidationErrors;
+    public $HasErrors;
+
+    public $ValidationErrors;
 }
