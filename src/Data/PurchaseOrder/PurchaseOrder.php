@@ -10,25 +10,49 @@ use Supplycart\Xero\Data\Data;
  */
 class PurchaseOrder extends Data
 {
+    public bool $ignoreMissing = true;
+
     public $PurchaseOrderID;
+
+    /**
+     * @var \Supplycart\Xero\Data\Contact|array|object|null
+     */
+    public $Contact;
+
+    public $Date;
+
+    public $DeliveryDate;
+
+    public $LineAmountTypes;
 
     public $PurchaseOrderNumber;
 
     public $Reference;
 
+    /**
+     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection|array|object|null
+     */
+    public $LineItems;
+
+    public $BrandingThemeID;
+
+    public $CurrencyCode;
+
+    public $Status;
+
+    public $SentToContact;
+
+    public $DeliveryAddress;
+
     public $AttentionTo;
 
     public $Telephone;
 
-    public $DeliveryAddress;
-
-    public $DeliveryDateString;
-
     public $DeliveryInstructions;
 
-    public $DateString;
+    public $ExpectedArrivalDate;
 
-    public $Status;
+    public $CurrencyRate;
 
     public $SubTotal;
 
@@ -36,41 +60,13 @@ class PurchaseOrder extends Data
 
     public $Total;
 
-    public $Date;
-
-    public $HasErrors;
-
-    public $IsDiscounted;
-
     public $TotalDiscount;
-
-    public $SentToContact;
-
-    public $Type;
-
-    public $CurrencyRate;
-
-    public $CurrencyCode;
-
-    public $LineAmountTypes;
-
-    public $UpdatedDateUTC;
-
-    /**
-     * @var \Supplycart\Xero\Data\PurchaseOrder\LineItemCollection|array|object|null
-     */
-    public $LineItems;
-
-    public $StatusAttributeString;
 
     public $HasAttachments;
 
-    public $Attachments;
+    public $UpdatedDateUTC;
 
-    /**
-     * @var \Supplycart\Xero\Data\Contact|array|object|null
-     */
-    public $Contact;
+    public $HasErrors;
 
     public $ValidationErrors;
 }
