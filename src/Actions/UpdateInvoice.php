@@ -4,37 +4,28 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
-use Supplycart\Xero\Data\History\History;
+use Supplycart\Xero\Data\Invoice\Bill;
+use Supplycart\Xero\Data\Invoice\Invoice;
 
-class CreateHistory extends Action implements ShouldCheckConnection
+class UpdateInvoice extends Action implements ShouldCheckConnection
 {
     /**
-     * @param string $endpoint
-     * @param string $guid
-     * @param array $notes
+     * @param string $invoiceId
+     * @param array $data
      *
-     * @return \Supplycart\Xero\Data\History\History
+     * @return Bill|Invoice
      */
-    public function handle(string $endpoint, string $guid, array $notes = [])
+    public function handle(string $invoiceId, array $data = [])
     {
         try {
             $this->log(__CLASS__ . ': START');
 
-            $url = sprintf('https://api.xero.com/api.xro/2.0/%s/%s/History', $endpoint, $guid);
-
-            $data = [
-                'HistoryRecords' => array_map(function ($note) {
-                    return [
-                        'Details' => $note,
-                    ];
-                }, $notes),
-            ];
-
-            $response = $this->xero->client->put(
-                $url,
+            $response = $this->xero->client->post(
+                "https://api.xero.com/api.xro/2.0/Invoices/{$invoiceId}",
                 [
                     'query' => [
                         'SummarizeErrors' => 'false',
+                        'unitdp' => 4,
                     ],
                     'json' => $data,
                     'headers' => [
@@ -48,7 +39,11 @@ class CreateHistory extends Action implements ShouldCheckConnection
 
             $this->log(__CLASS__ . ': END');
 
-            return new History((array) data_get($data, 'HistoryRecords.0'));
+            if (data_get($data, 'Invoices.0.Type') === 'ACCPAY') {
+                return new Bill((array) data_get($data, 'Invoices.0'));
+            }
+
+            return new Invoice((array) data_get($data, 'Invoices.0'));
         } catch (Exception $ex) {
             throw $ex;
         }

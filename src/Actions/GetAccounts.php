@@ -2,6 +2,8 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Exception;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Account\AccountCollection;
 
