@@ -2,6 +2,7 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Exception;
 use Supplycart\Xero\Data\Contact\Contact;
 
 class GetContact extends Action
@@ -12,15 +13,19 @@ class GetContact extends Action
      */
     public function handle(array $data)
     {
-        if (filled(data_get($data, 'id'))) {
-            return $this->findById(data_get($data, 'id'));
-        }
+        try {
+            if (filled(data_get($data, 'id'))) {
+                return $this->findById(data_get($data, 'id'));
+            }
 
-        if (filled(data_get($data, 'name'))) {
-            return $this->findByName(data_get($data, 'name'));
-        }
+            if (filled(data_get($data, 'name'))) {
+                return $this->findByName(data_get($data, 'name'));
+            }
 
-        return false;
+            return false;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 
     private function findById($id)

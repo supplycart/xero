@@ -2,12 +2,10 @@
 
 namespace Supplycart\Xero\Actions;
 
-use GuzzleHttp\Exception\ClientException;
+use Exception;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Arr;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder;
-use Supplycart\Xero\Exceptions\NoActiveConnectionException;
 
 class CreatePurchaseOrder extends Action implements ShouldCheckConnection
 {
@@ -24,26 +22,30 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
      */
     public function handle(PurchaseOrder $data)
     {
-        $this->log(__CLASS__ . ': START');
+        try {
+            $this->log(__CLASS__ . ': START');
 
-        $response = $this->xero->client->post(
-            'https://api.xero.com/api.xro/2.0/PurchaseOrders',
-            [
-                'query' => [
-                    'SummarizeErrors' => 'false',
-                ],
-                'json' => $data->toArray(),
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
-                    'xero-tenant-id' => $this->xero->storage->getTenantID(),
-                ],
-            ]
-        );
+            $response = $this->xero->client->post(
+                'https://api.xero.com/api.xro/2.0/PurchaseOrders',
+                [
+                    'query' => [
+                        'SummarizeErrors' => 'false',
+                    ],
+                    'json' => $data->toArray(),
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
+                        'xero-tenant-id' => $this->xero->storage->getTenantID(),
+                    ],
+                ]
+            );
 
-        $data = (array) json_decode($response->getBody()->getContents());
+            $data = (array) json_decode($response->getBody()->getContents());
 
-        $this->log(__CLASS__ . ': END');
+            $this->log(__CLASS__ . ': END');
 
-        return new PurchaseOrder((array) data_get($data, 'PurchaseOrders.0'));
+            return new PurchaseOrder((array) data_get($data, 'PurchaseOrders.0'));
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 }
