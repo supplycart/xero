@@ -14,7 +14,7 @@ class GetAccounts extends Action implements ShouldCheckConnection
      *
      * @return \Supplycart\Xero\Data\Contact\AccountCollection
      */
-    public function handle(array $params = [])
+    public function handle(array $params = [], ?string $ifModifiedSince = null)
     {
         try {
             $defaultParams = [];
@@ -29,6 +29,7 @@ class GetAccounts extends Action implements ShouldCheckConnection
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
                     'xero-tenant-id' => $this->xero->storage->getTenantID(),
+                    'If-Modified-Since' => $ifModifiedSince
                 ],
             ]);
 
