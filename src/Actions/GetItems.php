@@ -5,14 +5,14 @@ namespace Supplycart\Xero\Actions;
 use Exception;
 use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
-use Supplycart\Xero\Data\Account\AccountCollection;
+use Supplycart\Xero\Data\Item\ItemCollection;
 
-class GetAccounts extends Action implements ShouldCheckConnection
+class GetItems extends Action implements ShouldCheckConnection
 {
     /**
      * @param array $params
      *
-     * @return \Supplycart\Xero\Data\Contact\AccountCollection
+     * @return \Supplycart\Xero\Data\Item\ItemCollection
      */
     public function handle(array $params = [], ?string $ifModifiedSince = null)
     {
@@ -21,7 +21,7 @@ class GetAccounts extends Action implements ShouldCheckConnection
 
             $whereParam = urldecode(http_build_query(array_merge($defaultParams, $params), '=', ' AND '));
 
-            $response = $this->xero->client->get('https://api.xero.com/api.xro/2.0/Accounts', [
+            $response = $this->xero->client->get('https://api.xero.com/api.xro/2.0/Items', [
                 'query' => [
                     'SummarizeErrors' => 'false',
                     'where' => $whereParam,
@@ -33,9 +33,9 @@ class GetAccounts extends Action implements ShouldCheckConnection
                 ],
             ]);
 
-            $data = (array) json_decode($response->getBody()->getContents());
+            $data = json_decode($response->getBody()->getContents());
 
-            return new AccountCollection((array) data_get($data, 'Accounts'));
+            return new ItemCollection(data_get($data, 'Items', []));
         } catch (DataTransferObjectError $ex) {
             throw new Exception(sprintf('%s: Line: %s, Error: %s', get_class($ex), $ex->getLine(), $ex->getMessage()));
         } catch (Exception $ex) {
