@@ -8,7 +8,7 @@ class TaxRateController extends Controller
 {
     public function index($uuid)
     {
-        $xero = Xero::findByUuid($uuid);
+        $xero = config('xero.xero_model')::findByUuid($uuid);
 
         $rates = $xero->manager()->getTaxRates();
 

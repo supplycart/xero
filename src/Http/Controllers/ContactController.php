@@ -10,7 +10,7 @@ class ContactController extends Controller
     public function index(Request $request, $uuid)
     {
         /** @var Xero $xero */
-        $xero = Xero::findByUuid($uuid);
+        $xero = config('xero.xero_model')::findByUuid($uuid);
 
         $contacts = $xero->manager()->getContacts();
 
