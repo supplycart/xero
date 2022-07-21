@@ -34,7 +34,7 @@ class Redirect extends Action
             ->setExpiredAt(Carbon::now()->addSeconds($token->expires_in))
             ->persist();
 
-        $connections = $this->xero->getConnections();
+        $connections = $this->xero->getConnections()->collection;
 
         if (empty($connections)) {
             return $this->failed();

@@ -45,6 +45,6 @@ class GetConnectionsTest extends TestCase
         $connections = $action->handle();
 
         $this->assertInstanceOf(ConnectionCollection::class, $connections);
-        $this->assertInstanceOf(Connection::class, $connection = $connections[0]);
+        $this->assertInstanceOf(Connection::class, $connection = $connections->collection[0]);
     }
 }
