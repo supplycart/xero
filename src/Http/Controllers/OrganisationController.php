@@ -10,7 +10,7 @@ class OrganisationController extends Controller
 {
     public function index(Request $request, $uuid)
     {
-        $organisation = Xero::findByUuid($uuid)->manager()->getOrganisation();
+        $organisation = config('xero.xero_model')::findByUuid($uuid)->manager()->getOrganisation();
 
         return response()->json(data_get($organisation, 'Organisations.0'));
     }

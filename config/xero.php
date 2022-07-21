@@ -1,5 +1,7 @@
 <?php
 
+use Supplycart\Xero\Xero;
+
 return [
     'enabled' => env('XERO_ENABLED', false),
     'api_base_uri' => 'https://api.xero.com',
@@ -30,4 +32,5 @@ return [
     ],
     'log_channel' => env('XERO_LOG_CHANNEL', 'xero'),
     'debug' => env('XERO_DEBUG', false),
+    'xero_model' => Xero::class,
 ];

@@ -10,7 +10,7 @@ class AccountController extends Controller
 {
     public function index(Request $request, $uuid)
     {
-        $xero = Xero::findByUuid($uuid);
+        $xero = config('xero.xero_model')::findByUuid($uuid);
 
         $accounts = $xero->manager()->getAccounts();
 

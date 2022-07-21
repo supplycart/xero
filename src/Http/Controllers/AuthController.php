@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         /** @var Xero $xero */
-        $xero = Xero::findByUuid($request->input('state'));
+        $xero = config('xero.xero_model')::findByUuid($request->input('state'));
 
         return $xero->manager()->authenticate($request);
     }
@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function redirect(Request $request)
     {
         /** @var Xero $xero */
-        $xero = Xero::findByUuid($request->input('state'));
+        $xero = config('xero.xero_model')::findByUuid($request->input('state'));
 
         return $xero->manager()->redirect($request->input('code'));
     }
@@ -26,7 +26,7 @@ class AuthController extends Controller
     public function authenticateInternal(Request $request)
     {
         /** @var Xero $xero */
-        $xero = Xero::findByUuid($request->input('state'));
+        $xero = config('xero.xero_model')::findByUuid($request->input('state'));
 
         return $xero->manager()->authenticateInternal($request);
     }
@@ -34,7 +34,7 @@ class AuthController extends Controller
     public function redirectInternal(Request $request)
     {
         /** @var Xero $xero */
-        $xero = Xero::findByUuid($request->input('state'));
+        $xero = config('xero.xero_model')::findByUuid($request->input('state'));
 
         return $xero->manager()->redirectInternal($request->input('code'));
     }

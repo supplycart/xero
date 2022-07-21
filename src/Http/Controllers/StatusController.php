@@ -12,7 +12,7 @@ class StatusController extends Controller
 {
     public function show($uuid)
     {
-        $xero = Xero::findByUuid($uuid);
+        $xero = config('xero.xero_model')::findByUuid($uuid);
 
         return response()->json([
             'is_authenticated' => $xero->manager()->isAuthenticated(),
@@ -23,7 +23,7 @@ class StatusController extends Controller
 
     public function update(Request $request, $uuid)
     {
-        $xero = Xero::findByUuid(['uuid' => $uuid]);
+        $xero = config('xero.xero_model')::findByUuid(['uuid' => $uuid]);
 
         $xero->update($request->only('contact_id', 'is_enabled', 'account_code'));
 

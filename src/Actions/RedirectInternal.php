@@ -25,7 +25,7 @@ class RedirectInternal extends Action
         }
 
         //create temporary xero to hold tokens
-        $xeroTemp = Xero::create(['uuid' => Str::uuid()]);
+        $xeroTemp = config('xero.xero_model')::create(['uuid' => Str::uuid()]);
         $storageTemp = $xeroTemp->manager()->storage;
 
         $storageTemp
@@ -44,9 +44,9 @@ class RedirectInternal extends Action
 
         foreach ($connectionsArray as $connection) {
             $this->log($connection['tenantId']);
-            $xero = Xero::where('tenant_id', $connection['tenantId'])->where('is_internal', true)->first();
+            $xero = config('xero.xero_model')::where('tenant_id', $connection['tenantId'])->where('is_internal', true)->first();
             if (!$xero) {
-                $xero = Xero::create([
+                $xero = config('xero.xero_model')::create([
                     'uuid' => Str::uuid(),
                     'is_internal' => true,
                     'tenant_id' => $connection['tenantId']
