@@ -2,10 +2,10 @@
 
 namespace Supplycart\Xero\Data;
 
-use Spatie\DataTransferObject\DataTransferObjectCollection;
+use Spatie\DataTransferObject\DataTransferObject;
 use Supplycart\Xero\Data\Connection\Connection;
 
-abstract class DataCollection extends DataTransferObjectCollection
+abstract class DataCollection extends DataTransferObject
 {
     /**
      * @param array $collection

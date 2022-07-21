@@ -9,8 +9,8 @@
     "php": ">=7.4",
     "guzzlehttp/guzzle": "^7.0.1",
     "ext-json": "*",
-    "spatie/data-transfer-object": "2.8.1",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "spatie/data-transfer-object": "^3.0"
   },
   "require-dev": {
     "orchestra/testbench": "6.24.1",
