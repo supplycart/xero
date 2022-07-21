@@ -2,8 +2,8 @@
 
 namespace Supplycart\Xero\Data;
 
-use Spatie\DataTransferObject\FlexibleDataTransferObject;
+use Spatie\DataTransferObject\DataTransferObject;
 
-abstract class Data extends FlexibleDataTransferObject
+abstract class Data extends DataTransferObject
 {
 }
