@@ -9,9 +9,18 @@ class Disconnect extends Action
         $this->log(__CLASS__ . ': START');
 
         $connections = $this->xero->getConnections();
-        $connectionId = data_get($connections, '0.id');
-
-        $this->xero->client->delete("https://api.xero.com/connections/{$connectionId}");
+        $connectionId = data_get($connections, 'collection.0.id');
+        $this->xero->client->delete(
+            "https://api.xero.com/connections/{$connectionId}",
+            [
+                'query' => [
+                    'SummarizeErrors' => 'false',
+                ],
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
+                ],
+            ]
+        );
 
         $this->xero->storage->setAccessToken(null);
         $this->xero->storage->setRefreshToken(null);
