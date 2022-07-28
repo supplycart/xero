@@ -17,11 +17,7 @@ class GetContacts extends Action implements ShouldCheckConnection
     public function handle(array $params = [])
     {
         try {
-            $defaultParams = [
-                'IsSupplier' => 'true',
-            ];
-
-            $whereParam = urldecode(http_build_query(array_merge($defaultParams, $params), '=', ' AND '));
+            $whereParam = urldecode(http_build_query($params, '=', ' AND '));
 
             $response = $this->xero->client->get('https://api.xero.com/api.xro/2.0/Contacts', [
                 'query' => [

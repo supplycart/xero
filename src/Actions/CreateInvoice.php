@@ -4,10 +4,11 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Data\Invoice\Invoice;
 
 class CreateInvoice extends Action implements ShouldCheckConnection
 {
-    public function handle(array $data)
+    public function handle(Invoice $data)
     {
         try {
             $this->log(__CLASS__ . ': START');
@@ -27,7 +28,8 @@ class CreateInvoice extends Action implements ShouldCheckConnection
 
             $this->log(__CLASS__ . ': END');
 
-            return $data;
+            $invoiceData = data_get($data, 'Invoices.0');
+            return new Invoice(json_decode(json_encode($invoiceData), true));
         } catch (Exception $ex) {
             throw $ex;
         }
