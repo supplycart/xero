@@ -16,7 +16,8 @@ return [
         'authenticated_uri' => env('XERO_AUTHENTICATED_URI'),
         'scope' => env(
             'XERO_SCOPE',
-            'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings'
+            'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings             'offline_access openid profile email accounting.transactions accounting.contacts accounting.settings accounting.attachments'
+            '
         ),
         'authorize_url' => 'https://login.xero.com/identity/connect/authorize',
         'access_token_url' => 'https://identity.xero.com/connect/token',
