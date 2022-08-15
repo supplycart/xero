@@ -40,7 +40,8 @@ use Supplycart\Xero\Http\Controllers\TaxRateController;
  * @method PurchaseOrder getPurchaseOrder(string $string)
  * @method PurchaseOrder updatePurchaseOrder(PurchaseOrder $purchaseOrder)
  * @method ItemCollection getItems(array $params)
- * @method CreateAttachment()
+ * @method createAttachment()
+ * @method createItems()
  */
 class XeroManager
 {
