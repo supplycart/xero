@@ -16,7 +16,7 @@ class GetBills extends Action implements ShouldCheckConnection
      *
      * @return \Supplycart\Xero\Data\Invoice\BillCollection
      */
-    public function handle(array $where = [], array $contactIds = [], array $invoiceNumbers = [], array $invoiceIds)
+    public function handle(array $where = [], array $contactIds = [], array $invoiceNumbers = [], array $invoiceIds = [])
     {
         try {
             $whereParam = urldecode(http_build_query($where, '==', ' AND '));
