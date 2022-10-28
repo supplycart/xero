@@ -22,4 +22,15 @@ abstract class DataCollection extends DataTransferObject
     }
 
     abstract public function for();
+
+    public function toArray(): array
+    {
+        $collection = $this->collection;
+
+        foreach ($collection as $key => $item) {
+            $collection[$key] = $item->toArray();
+        }
+
+        return $collection;
+    }
 }
