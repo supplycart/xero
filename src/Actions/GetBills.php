@@ -13,15 +13,17 @@ class GetBills extends Action implements ShouldCheckConnection
      * @param array $where
      * @param array $contactIds
      * @param array $invoiceNumbers
+     * @param bool $summaryOnly
      *
      * @return \Supplycart\Xero\Data\Invoice\BillCollection
      */
-    public function handle(array $where = [], array $contactIds = [], array $invoiceNumbers = [])
+    public function handle(array $where = [], array $contactIds = [], array $invoiceNumbers = [], array $invoiceIds = [], bool $summaryOnly = false)
     {
         try {
             $whereParam = urldecode(http_build_query($where, '==', ' AND '));
             $contactIds = implode(',', $contactIds);
             $invoiceNumbers = implode(',', $invoiceNumbers);
+            $invoiceIds = implode(',', $invoiceIds);
 
             $response = $this->xero->client->get(
                 "https://api.xero.com/api.xro/2.0/Invoices",
@@ -31,6 +33,8 @@ class GetBills extends Action implements ShouldCheckConnection
                         'where' => $whereParam,
                         'ContactIDs' => $contactIds,
                         'InvoiceNumbers' => $invoiceNumbers,
+                        'IDs' => $invoiceIds,
+                        'summaryOnly' => $summaryOnly,
                     ],
                     'headers' => [
                         'Authorization' => 'Bearer ' . $this->xero->storage->getAccessToken(),
