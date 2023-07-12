@@ -121,8 +121,14 @@ class Xero extends Model implements Storage
         return XeroManager::init($this);
     }
 
+    /**
+     * Query for connections whose tokens are expiring in N minutes
+     *
+     * @param Builder $query
+     * @return void
+     */
     public function scopeTokenExpiring(Builder $query)
     {
-        return $query->where('expired_at', '<=', now()->addMinutes(5));
+        return $query->where('expired_at', '<=', now()->addMinutes(config('xero.token_refresh_countdown')));
     }
 }
