@@ -2,15 +2,15 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Data\Connection\ConnectionCollection;
 
 class GetConnections extends Action
 {
     public function handle()
     {
-        $this->log(__CLASS__ . ': START');
-
         try {
             $response = $this->xero->client->get(
                 'https://api.xero.com/connections',
@@ -23,16 +23,13 @@ class GetConnections extends Action
                     ],
                 ]
             );
-        } catch (ClientException $e) {
-            $this->log('ERROR!: ' . $e->getMessage());
 
-            return [];
+            $connections = (array) json_decode($response->getBody()->getContents());
+
+            return new ConnectionCollection($connections);
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            throw $ex;
         }
-
-        $connections = (array) json_decode($response->getBody()->getContents());
-
-        $this->log(__CLASS__ . ': ENDS');
-
-        return new ConnectionCollection($connections);
     }
 }

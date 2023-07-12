@@ -3,7 +3,9 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\PurchaseOrder\PurchaseOrder;
 
@@ -23,8 +25,6 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
     public function handle(PurchaseOrder $data)
     {
         try {
-            $this->log(__CLASS__ . ': START');
-
             $response = $this->xero->client->post(
                 'https://api.xero.com/api.xro/2.0/PurchaseOrders',
                 [
@@ -41,10 +41,9 @@ class CreatePurchaseOrder extends Action implements ShouldCheckConnection
 
             $data = (array) json_decode($response->getBody()->getContents());
 
-            $this->log(__CLASS__ . ': END');
-
             return new PurchaseOrder((array) data_get($data, 'PurchaseOrders.0'));
-        } catch (Exception $ex) {
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

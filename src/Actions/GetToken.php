@@ -2,7 +2,9 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Data\Token;
 
 class GetToken extends Action
@@ -14,8 +16,6 @@ class GetToken extends Action
      */
     public function handle(string $code)
     {
-        $this->log(__CLASS__ . ': START');
-
         try {
             $response = $this->xero->client->post(config('xero.oauth2.access_token_url'), [
                 'headers' => [
@@ -31,11 +31,10 @@ class GetToken extends Action
             $data = (array) json_decode($response->getBody()->getContents());
 
             $this->log($response->getBody()->getContents());
-        } catch (ClientException $e) {
-            return null;
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            throw $ex;
         }
-
-        $this->log(__CLASS__ . ': END');
 
         return new Token($data);
     }

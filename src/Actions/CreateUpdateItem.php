@@ -3,9 +3,11 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
-use Supplycart\Xero\Data\Item\Item;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Data\Item\Item;
 
 class CreateUpdateItem extends Action implements ShouldCheckConnection
 {
@@ -19,8 +21,6 @@ class CreateUpdateItem extends Action implements ShouldCheckConnection
     public function handle(Item $data)
     {
         try {
-            $this->log(__CLASS__ . ': START');
-
             $response = $this->xero->client->post(
                 'https://api.xero.com/api.xro/2.0/Items',
                 [
@@ -37,10 +37,9 @@ class CreateUpdateItem extends Action implements ShouldCheckConnection
 
             $data = (array) json_decode($response->getBody()->getContents());
 
-            $this->log(__CLASS__ . ': END');
-
             return new Item((array) data_get($data, 'Items.0'));
-        } catch (Exception $ex) {
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

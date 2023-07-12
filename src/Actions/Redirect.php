@@ -3,8 +3,6 @@
 namespace Supplycart\Xero\Actions;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Supplycart\Xero\Data\Token;
 use Supplycart\Xero\Events\XeroAuthenticated;
 use Supplycart\Xero\Events\XeroAuthenticationFailed;
 

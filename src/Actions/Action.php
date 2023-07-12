@@ -73,4 +73,15 @@ abstract class Action
 
         return logs()->channel($channel)->$type($message);
     }
+
+    /**
+     * Write error logs
+     *
+     * @param string $message
+     * @return void
+     */
+    public function logError(string $message)
+    {
+        $this->log('XERO ERROR: ' . $message, 'error');
+    }
 }

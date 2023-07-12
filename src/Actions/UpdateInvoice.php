@@ -3,6 +3,8 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Invoice\Bill;
 use Supplycart\Xero\Data\Invoice\Invoice;
@@ -18,8 +20,6 @@ class UpdateInvoice extends Action implements ShouldCheckConnection
     public function handle(string $invoiceId, array $data = [])
     {
         try {
-            $this->log(__CLASS__ . ': START');
-
             $response = $this->xero->client->post(
                 "https://api.xero.com/api.xro/2.0/Invoices/{$invoiceId}",
                 [
@@ -37,14 +37,13 @@ class UpdateInvoice extends Action implements ShouldCheckConnection
 
             $data = (array) json_decode($response->getBody()->getContents());
 
-            $this->log(__CLASS__ . ': END');
-
             if (data_get($data, 'Invoices.0.Type') === 'ACCPAY') {
                 return new Bill((array) data_get($data, 'Invoices.0'));
             }
 
             return new Invoice((array) data_get($data, 'Invoices.0'));
-        } catch (Exception $ex) {
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

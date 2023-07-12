@@ -6,8 +6,6 @@ class Disconnect extends Action
 {
     public function handle()
     {
-        $this->log(__CLASS__ . ': START');
-
         $connections = $this->xero->getConnections();
         $connectionId = data_get($connections, 'collection.0.id');
         $this->xero->client->delete(
@@ -25,7 +23,5 @@ class Disconnect extends Action
         $this->xero->storage->setAccessToken(null);
         $this->xero->storage->setRefreshToken(null);
         $this->xero->storage->persist();
-
-        $this->log(__CLASS__ . ': ENDS');
     }
 }

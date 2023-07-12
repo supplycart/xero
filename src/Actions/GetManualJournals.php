@@ -3,6 +3,8 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
+use Spatie\DataTransferObject\DataTransferObjectError;
 
 class GetManualJournals extends Action
 {
@@ -38,8 +40,8 @@ class GetManualJournals extends Action
 
             $data = (array) json_decode($response->getBody()->getContents());
             return (array) data_get($data, 'ManualJournals');
-        } catch (Exception $ex) {
-            $this->log($ex->getResponse()->getBody()->getContents(), 'error');
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }
