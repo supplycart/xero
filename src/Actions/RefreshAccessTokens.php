@@ -2,14 +2,14 @@
 
 namespace Supplycart\Xero\Actions;
 
+use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Spatie\DataTransferObject\DataTransferObjectError;
 
 class RefreshAccessTokens extends Action
 {
     public function handle()
     {
-        $this->log(__CLASS__ . ': START');
-
         /** @var \Supplycart\Xero\Xero $xero */
         $xero = $this->xero->storage->refresh();
 
@@ -30,19 +30,20 @@ class RefreshAccessTokens extends Action
             $xero->setRefreshToken(data_get($data, 'refresh_token'));
             $xero->setExpiredAt(now()->addSeconds(data_get($data, 'expires_in')));
             $xero->persist();
-        } catch (ClientException $e) {
-            if ($xero->getExpiredAt()->diffInDays(now()) >= 60) {
+        } catch (DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            throw $ex;
+        } catch (ClientException $ex) {
+            // Reset for tokens that have expired for N days
+            if ($xero->getExpiredAt()->diffInDays(now()) >= config('xero.token_expired_days')) {
                 $xero->setAccessToken(null);
                 $xero->setRefreshToken(null);
                 $xero->persist();
-
-                $this->log('XERO disconnected!');
             }
 
-            return false;
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            throw $ex;
         }
-
-        $this->log(__CLASS__ . ': END');
 
         return true;
     }

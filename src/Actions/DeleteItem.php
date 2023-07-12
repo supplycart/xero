@@ -3,7 +3,9 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Spatie\DataTransferObject\DataTransferObjectError;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 
 class DeleteItem extends Action implements ShouldCheckConnection
@@ -24,7 +26,8 @@ class DeleteItem extends Action implements ShouldCheckConnection
             ]);
 
             return response()->json(['status' => 'success', 'message' => 'Item deleted']);
-        } catch (Exception $ex) {
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

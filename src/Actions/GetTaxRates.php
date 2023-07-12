@@ -3,9 +3,10 @@
 namespace Supplycart\Xero\Actions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Spatie\DataTransferObject\DataTransferObjectError;
-use Supplycart\Xero\Data\TaxRate\TaxRateCollection;
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
+use Supplycart\Xero\Data\TaxRate\TaxRateCollection;
 
 class GetTaxRates extends Action implements ShouldCheckConnection
 {
@@ -33,9 +34,8 @@ class GetTaxRates extends Action implements ShouldCheckConnection
             $data = json_decode($response->getBody()->getContents());
 
             return new TaxRateCollection((array) data_get($data, 'TaxRates'));
-        } catch (DataTransferObjectError $ex) {
-            throw new Exception(sprintf('%s: Line: %s, Error: %s', get_class($ex), $ex->getLine(), $ex->getMessage()));
-        } catch (Exception $ex) {
+        } catch (ClientException | DataTransferObjectError | Exception $ex) {
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
     }
