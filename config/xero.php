@@ -33,4 +33,7 @@ return [
     'log_channel' => env('XERO_LOG_CHANNEL', 'xero'),
     'debug' => env('XERO_DEBUG', false),
     'xero_model' => Xero::class,
+
+    // Countdown minutes before the refresh token expires
+    'token_refresh_countdown' => env('XERO_TOKEN_REFRESH_COUNTDOWN', 5),
 ];
