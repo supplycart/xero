@@ -4,6 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Symfony\Component\HttpFoundation\Response;
 use Spatie\DataTransferObject\DataTransferObjectError;
 
 class RefreshAccessTokens extends Action
@@ -30,17 +31,23 @@ class RefreshAccessTokens extends Action
             $xero->setRefreshToken(data_get($data, 'refresh_token'));
             $xero->setExpiredAt(now()->addSeconds(data_get($data, 'expires_in')));
             $xero->persist();
-        } catch (DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
-            throw $ex;
         } catch (ClientException $ex) {
-            // Reset for tokens that have expired for N days
-            if ($xero->getExpiredAt()->diffInDays(now()) >= config('xero.token_expired_days')) {
+            // Reset XERO "enabled" state if the refresh token has expired or become invalid
+            // So that it would throw the error only once since token refresh only perform on "enabled" XERO connections
+            if (in_array($ex->getCode(), [
+                Response::HTTP_BAD_REQUEST,
+                Response::HTTP_UNAUTHORIZED,
+                Response::HTTP_FORBIDDEN,
+            ])) {
                 $xero->setAccessToken(null);
                 $xero->setRefreshToken(null);
+                $xero->is_enabled = false;
                 $xero->persist();
             }
 
+            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            throw $ex;
+        } catch (DataTransferObjectError | Exception $ex) {
             $this->logError(__CLASS__ . ': ' . $ex->getMessage());
             throw $ex;
         }
