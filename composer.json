@@ -13,7 +13,7 @@
     "spatie/data-transfer-object": "^3.9"
   },
   "require-dev": {
-    "orchestra/testbench": "^8.0",
+    "orchestra/testbench": "^9.0",
     "friendsofphp/php-cs-fixer": "^3.6"
   },
   "autoload": {
