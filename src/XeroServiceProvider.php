@@ -10,6 +10,7 @@ class XeroServiceProvider extends ServiceProvider
     {
     }
 
+    #[\Override]
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/xero.php', 'xero');

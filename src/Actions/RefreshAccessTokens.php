@@ -5,7 +5,7 @@ namespace Supplycart\Xero\Actions;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 
 class RefreshAccessTokens extends Action
 {
@@ -45,10 +45,10 @@ class RefreshAccessTokens extends Action
                 $xero->persist();
             }
 
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
-        } catch (DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
 

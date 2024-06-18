@@ -15,17 +15,10 @@ class XeroAuthenticationFailed implements ShouldBroadcast
     use SerializesModels;
 
     /**
-     * @var string
-     */
-    public string $uuid;
-
-    /**
      * Create a new event instance.
-     * @param string $uuid
      */
-    public function __construct(string $uuid)
+    public function __construct(public string $uuid)
     {
-        $this->uuid = $uuid;
     }
 
     /**
@@ -33,6 +26,7 @@ class XeroAuthenticationFailed implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+    #[\Override]
     public function broadcastOn()
     {
         return new PrivateChannel('xero@' . $this->uuid);

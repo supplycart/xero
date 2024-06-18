@@ -4,13 +4,12 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Data\Contact\Contact;
 
 class GetContact extends Action
 {
     /**
-     * @param array $data
      * @return bool|\Supplycart\Xero\Data\Contact\Contact
      */
     public function handle(array $data)
@@ -25,8 +24,8 @@ class GetContact extends Action
             }
 
             return false;
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

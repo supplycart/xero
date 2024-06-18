@@ -6,14 +6,14 @@
     "fix": "vendor/bin/php-cs-fixer"
   },
   "require": {
-    "php": ">=7.4",
+    "php": "^8.3",
     "guzzlehttp/guzzle": "^7.0.1",
     "ext-json": "*",
-    "phpunit/phpunit": "^9.5",
-    "spatie/data-transfer-object": "^3.0"
+    "spatie/laravel-data": "^3.0",
+    "spatie/data-transfer-object": "^3.9"
   },
   "require-dev": {
-    "orchestra/testbench": "6.24.1",
+    "orchestra/testbench": "^9.0",
     "friendsofphp/php-cs-fixer": "^3.6"
   },
   "autoload": {

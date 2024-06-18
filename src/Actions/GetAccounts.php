@@ -4,15 +4,13 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Account\AccountCollection;
 
 class GetAccounts extends Action implements ShouldCheckConnection
 {
     /**
-     * @param array $params
-     *
      * @return \Supplycart\Xero\Data\Contact\AccountCollection
      */
     public function handle(array $params = [], ?string $ifModifiedSince = null)
@@ -37,8 +35,8 @@ class GetAccounts extends Action implements ShouldCheckConnection
             $data = (array) json_decode($response->getBody()->getContents());
 
             return new AccountCollection((array) data_get($data, 'Accounts'));
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

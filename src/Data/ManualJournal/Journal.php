@@ -16,15 +16,15 @@ class Journal extends Data
     /**
      * Optional fields
      */
-    public ?string $Date;
+    public ?string $Date = null;
 
     public string $LineAmountTypes;
 
     public string $Status;
 
-    public ?string $Url;
+    public ?string $Url = null;
 
-    public ?bool $ShowOnCashBasisReports;
+    public ?bool $ShowOnCashBasisReports = null;
 
     public $ValidationErrors;
 }

@@ -26,8 +26,6 @@ class XeroAuthenticated implements ShouldBroadcast
 
     /**
      * Create a new event instance.
-     * @param string $uuid
-     * @param \Supplycart\Xero\Data\Token $token
      */
     public function __construct(string $uuid, Token $token)
     {
@@ -40,6 +38,7 @@ class XeroAuthenticated implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+    #[\Override]
     public function broadcastOn()
     {
         return new PrivateChannel('xero@' . $this->uuid);

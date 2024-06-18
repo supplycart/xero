@@ -11,6 +11,7 @@ class AccountCollection extends DataCollection
         return parent::current();
     }
 
+    #[\Override]
     public function for()
     {
         return Account::class;

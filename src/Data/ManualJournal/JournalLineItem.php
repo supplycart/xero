@@ -16,9 +16,9 @@ class JournalLineItem extends Data
     /**
      * Optional fields
      */
-    public ?string $Description;
+    public ?string $Description = null;
 
-    public ?string $TaxType;
+    public ?string $TaxType = null;
 
-    public ?string $Tracking;
+    public ?string $Tracking = null;
 }

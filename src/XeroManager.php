@@ -45,19 +45,11 @@ use Supplycart\Xero\Http\Controllers\TaxRateController;
  */
 class XeroManager
 {
-    public Storage $storage;
-
-    public Client $client;
-
     /**
      * Xero constructor.
-     * @param \GuzzleHttp\Client $client
-     * @param \Supplycart\Xero\Contracts\Storage $storage
      */
-    public function __construct(Client $client, Storage $storage)
+    public function __construct(public Client $client, public Storage $storage)
     {
-        $this->client = $client;
-        $this->storage = $storage;
     }
 
     public static function init(Storage $storage)

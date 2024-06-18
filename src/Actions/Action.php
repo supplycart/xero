@@ -17,7 +17,6 @@ abstract class Action
     /**
      * CreatePurchaseOrder constructor.
      *
-     * @param \Supplycart\Xero\XeroManager $xero
      * @throws \Supplycart\Xero\Exceptions\UnhandledActionException
      * @throws \Supplycart\Xero\Exceptions\NoActiveConnectionException
      */
@@ -54,7 +53,6 @@ abstract class Action
     }
 
     /**
-     * @param string $message
      * @param string $type
      * @return \Illuminate\Log\Logger|void
      */
@@ -77,7 +75,6 @@ abstract class Action
     /**
      * Write error logs
      *
-     * @param string $message
      * @return void
      */
     public function logError(string $message)

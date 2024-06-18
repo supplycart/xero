@@ -5,7 +5,7 @@ namespace Supplycart\Xero\Actions;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Item\Item;
 
@@ -38,8 +38,8 @@ class CreateUpdateItem extends Action implements ShouldCheckConnection
             $data = (array) json_decode($response->getBody()->getContents());
 
             return new Item((array) data_get($data, 'Items.0'));
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }
