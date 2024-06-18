@@ -11,6 +11,7 @@ class ContactCollection extends DataCollection
         return parent::current();
     }
 
+    #[\Override]
     public function for()
     {
         return Contact::class;

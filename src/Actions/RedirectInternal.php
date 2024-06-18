@@ -13,7 +13,6 @@ use Supplycart\Xero\Xero;
 class RedirectInternal extends Action
 {
     /**
-     * @param string $code
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function handle(string $code)

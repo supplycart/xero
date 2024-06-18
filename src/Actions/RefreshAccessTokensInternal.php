@@ -4,7 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 
 class RefreshAccessTokensInternal extends Action
 {
@@ -30,8 +30,8 @@ class RefreshAccessTokensInternal extends Action
             $xero->setRefreshToken(data_get($data, 'refresh_token'));
             $xero->setExpiredAt(now()->addSeconds(data_get($data, 'expires_in')));
             $xero->persist();
-        } catch (DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         } catch (ClientException $ex) {
             if ($xero->getExpiredAt()->diffInDays(now()) >= config('xero.token_expired_days')) {
@@ -40,7 +40,7 @@ class RefreshAccessTokensInternal extends Action
                 $xero->persist();
             }
 
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
 

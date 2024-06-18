@@ -15,6 +15,7 @@ use Supplycart\Xero\XeroManager;
 
 class RedirectTest extends TestCase
 {
+    #[\Override]
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);

@@ -23,6 +23,7 @@ abstract class DataCollection extends DataTransferObject
 
     abstract public function for();
 
+    #[\Override]
     public function toArray(): array
     {
         $collection = $this->collection;

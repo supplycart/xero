@@ -22,41 +22,41 @@ class Xero extends Model implements Storage
 
     protected $guarded = [];
 
-    protected $casts = [
-        'is_enabled' => 'boolean',
-        'expired_at' => 'datetime',
-        'is_internal' => 'boolean'
-    ];
-
     /**
      * @param $uuid
      * @return \Supplycart\Xero\Contracts\Storage | \Supplycart\Xero\Xero
      */
+    #[\Override]
     public static function findByUuid($uuid): Storage
     {
         return static::query()->firstOrCreate(['uuid' => $uuid]);
     }
 
+    #[\Override]
     public function getUuid(): string
     {
         return (string) $this->uuid;
     }
 
+    #[\Override]
     public function setAccessToken($accessToken): Storage
     {
         return $this->fill(['access_token' => $accessToken]);
     }
 
+    #[\Override]
     public function getAccessToken(): string
     {
         return (string) $this->access_token;
     }
 
+    #[\Override]
     public function setTenantID($tenantID): Storage
     {
         return $this->fill(['tenant_id' => $tenantID]);
     }
 
+    #[\Override]
     public function getTenantID(): string
     {
         return (string) $this->tenant_id;
@@ -72,21 +72,25 @@ class Xero extends Model implements Storage
         return (string) $this->account_code;
     }
 
+    #[\Override]
     public function setRefreshToken($refreshToken): Storage
     {
         return $this->fill(['refresh_token' => $refreshToken]);
     }
 
+    #[\Override]
     public function getRefreshToken(): string
     {
         return (string) $this->refresh_token;
     }
 
+    #[\Override]
     public function getExpiredAt(): Carbon
     {
         return $this->expired_at;
     }
 
+    #[\Override]
     public function setExpiredAt(Carbon $expiredAt): Storage
     {
         $this->expired_at = $expiredAt;
@@ -94,11 +98,13 @@ class Xero extends Model implements Storage
         return $this;
     }
 
+    #[\Override]
     public function getTenantName(): string
     {
         return (string) $this->tenant_name;
     }
 
+    #[\Override]
     public function setTenantName($tenantName): Storage
     {
         return $this->fill(['tenant_name' => $tenantName]);
@@ -107,6 +113,7 @@ class Xero extends Model implements Storage
     /**
      * @return bool
      */
+    #[\Override]
     public function persist(): bool
     {
         return $this->save();
@@ -124,11 +131,18 @@ class Xero extends Model implements Storage
     /**
      * Query for connections whose tokens are expiring in N minutes
      *
-     * @param Builder $query
      * @return void
      */
     public function scopeTokenExpiring(Builder $query)
     {
         return $query->where('expired_at', '<=', now()->addMinutes(config('xero.token_refresh_countdown')));
+    }
+    protected function casts(): array
+    {
+        return [
+            'is_enabled' => 'boolean',
+            'expired_at' => 'datetime',
+            'is_internal' => 'boolean'
+        ];
     }
 }

@@ -12,6 +12,7 @@ class LineItemCollection extends DataCollection
         return parent::current();
     }
 
+    #[\Override]
     public function for()
     {
         return LineItem::class;

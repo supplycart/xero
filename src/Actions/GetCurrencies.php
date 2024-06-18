@@ -4,7 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Currency\CurrencyCollection;
 
@@ -23,8 +23,8 @@ class GetCurrencies extends Action implements ShouldCheckConnection
             $data = json_decode($response->getBody()->getContents());
 
             return new CurrencyCollection(data_get($data, 'Currencies', []));
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

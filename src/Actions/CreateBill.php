@@ -4,7 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Contracts\ShouldCheckConnection;
 use Supplycart\Xero\Data\Invoice\Bill;
 
@@ -36,8 +36,8 @@ class CreateBill extends Action implements ShouldCheckConnection
             $data = (array) json_decode($response->getBody()->getContents());
 
             return new Bill((array) data_get($data, 'Invoices.0'));
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

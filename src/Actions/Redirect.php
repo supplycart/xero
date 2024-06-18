@@ -9,7 +9,6 @@ use Supplycart\Xero\Events\XeroAuthenticationFailed;
 class Redirect extends Action
 {
     /**
-     * @param string $code
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function handle(string $code = null)

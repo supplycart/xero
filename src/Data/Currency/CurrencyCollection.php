@@ -11,6 +11,7 @@ class CurrencyCollection extends DataCollection
         return parent::current();
     }
 
+    #[\Override]
     public function for()
     {
         return Currency::class;

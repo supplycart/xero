@@ -4,7 +4,7 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Data\Connection\ConnectionCollection;
 
 class GetConnections extends Action
@@ -27,8 +27,8 @@ class GetConnections extends Action
             $connections = (array) json_decode($response->getBody()->getContents());
 
             return new ConnectionCollection($connections);
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
     }

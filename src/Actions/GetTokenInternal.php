@@ -4,13 +4,12 @@ namespace Supplycart\Xero\Actions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Spatie\DataTransferObject\DataTransferObjectError;
+
 use Supplycart\Xero\Data\Token;
 
 class GetTokenInternal extends Action
 {
     /**
-     * @param string $code
      * @return \Supplycart\Xero\Data\Token
      * @throws \Throwable
      */
@@ -31,8 +30,8 @@ class GetTokenInternal extends Action
             $data = (array) json_decode($response->getBody()->getContents());
 
             $this->log($response->getBody()->getContents());
-        } catch (ClientException | DataTransferObjectError | Exception $ex) {
-            $this->logError(__CLASS__ . ': ' . $ex->getMessage());
+        } catch (ClientException | Exception $ex) {
+            $this->logError(self::class . ': ' . $ex->getMessage());
             throw $ex;
         }
 
