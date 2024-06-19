@@ -35,9 +35,9 @@ return [
     'xero_model' => Xero::class,
 
     // Countdown minutes before the refresh token expires
-    'token_refresh_countdown' => env('XERO_TOKEN_REFRESH_COUNTDOWN', 5),
+    'token_refresh_countdown' => intval(env('XERO_TOKEN_REFRESH_COUNTDOWN', 5)),
 
     // Days passed since the token expired
-    'token_expired_days' => env('XERO_TOKEN_EXPIRED_DAYS', 60),
+    'token_expired_days' => intval(env('XERO_TOKEN_EXPIRED_DAYS', 60)),
 
 ];
