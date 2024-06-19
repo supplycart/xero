@@ -21,27 +21,28 @@ use Supplycart\Xero\Http\Controllers\ContactController;
 use Supplycart\Xero\Http\Controllers\OrganisationController;
 use Supplycart\Xero\Http\Controllers\StatusController;
 use Supplycart\Xero\Http\Controllers\TaxRateController;
+use Supplycart\Xero\Data\Contact\AccountCollection;
 
 /**
  * Class Xero
  * @package Supplycart\Xero
  *
- * @method authenticate(Request $request)
+ * @method authenticate()
  * @method redirect(string $code)
  * @method createPurchaseOrder(PurchaseOrder $purchaseOrder)
  * @method refreshAccessTokens()
- * @method ContactCollection getContacts()
+ * @method ContactCollection getContacts(array $params)
  * @method array getOrganisation()
- * @method array getAccounts()
+ * @method AccountCollection getAccounts(array $params, ?string $ifModifiedSince)
  * @method ConnectionCollection getConnections()
  * @method disconnect()
- * @method getTaxRates()
- * @method Token|null getToken($code)
- * @method PurchaseOrder getPurchaseOrder(string $string)
+ * @method getTaxRates(array $where)
+ * @method Token|null getToken(string $code)
+ * @method PurchaseOrder getPurchaseOrder(string $poNumber)
  * @method PurchaseOrder updatePurchaseOrder(PurchaseOrder $purchaseOrder)
- * @method ItemCollection getItems(array $params)
- * @method createAttachment()
- * @method createItems()
+ * @method ItemCollection getItems(array $params, ?string $ifModifiedSince)
+ * @method createAttachment(string $endpoint, string $guid, string $filename, string $contentType, $content)
+ * @method createItems(array $data)
  */
 class XeroManager
 {
